@@ -23,8 +23,19 @@ Class {
 		'runner',
 		'selectedBenchmarks'
 	],
-	#category : 'SMark'
+	#category : #SMark
 }
+
+{ #category : #benchmarking }
+SMarkSuite class >> benchmarkForSelector: aSelector [
+
+	"Returns a single benchmark for the corresponding selector"
+
+  ^ SMarkBenchmark new
+		suite: self new;
+		selector: aSelector;
+		yourself
+]
 
 { #category : #defaults }
 SMarkSuite class >> defaultProblemSize [
@@ -123,6 +134,12 @@ SMarkSuite >> cleanUpInstanceVariables [
 { #category : #running }
 SMarkSuite >> instanceVariablesToPreserve [
 	^ #(runner)
+]
+
+{ #category : #running }
+SMarkSuite >> performBenchmarkSelector: aSelector [
+
+	^ self perform: aSelector
 ]
 
 { #category : #benchmarking }

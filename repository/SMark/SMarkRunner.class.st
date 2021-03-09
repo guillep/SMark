@@ -11,7 +11,7 @@ Class {
 		'problemSize',
 		'numProcesses'
 	],
-	#category : 'SMark'
+	#category : #SMark
 }
 
 { #category : #defaults }
@@ -60,7 +60,8 @@ SMarkRunner >> createTimer: name [
 
 { #category : #execution }
 SMarkRunner >> execute [
-	suite run.
+	
+	self runSuite.
 	self runBaseBenchmark.
 	^ results
 	
@@ -84,18 +85,40 @@ SMarkRunner >> iterations: anInteger [
 	numIterations := anInteger
 ]
 
+{ #category : #accessing }
+SMarkRunner >> numberOfIterations [
+
+	^ numIterations ifNil: [ self class defaultNumberOfIterations ]
+]
+
 { #category : #benchmarking }
 SMarkRunner >> performBenchmark: aSelector [
 	currentBenchmark := aSelector.
 	
-	1 to: numIterations do: [:i|
+	self preBenchmark.
+	1 to: self numberOfIterations do: [:i|
 		"self timedBenchmarkExecution: aSelector."
 		suite runBenchmark: aSelector.  
 	].	
-	
-	currentBenchmark := nil.
+	self postBenchmark.
 	
 	^ results at: (suite benchmarkNameForSelector: aSelector)
+]
+
+{ #category : #benchmarking }
+SMarkRunner >> postBenchmark [
+
+	"Hook for subclasses.
+	Executed after all iterations"
+	
+	currentBenchmark := nil.
+]
+
+{ #category : #benchmarking }
+SMarkRunner >> preBenchmark [
+
+	"Hook for subclasses.
+	Executed before all iterations"
 ]
 
 { #category : #printing }
@@ -137,14 +160,13 @@ SMarkRunner >> recordResults: timer for: aSelector [
 	| result name |
 	name := suite benchmarkNameForSelector: aSelector.
 	
-	result := SMarkResult new
-		total: timer totalTime;
-		benchmarkName: name;
-		suite: suite;
-		criteria: timers;
-		yourself.
+	result := SMarkResult new.
+	result total: timer totalTime.
+	result benchmarkName: name.
+	result suite: suite.
+	result criteria: timers.
 	
-	(results at: name ifAbsentPut: OrderedCollection new) add: result.
+	(results at: name ifAbsentPut: [OrderedCollection new]) add: result.
 ]
 
 { #category : #accessing }
@@ -186,6 +208,14 @@ SMarkRunner >> runBaseBenchmark [
 	^ self performBenchmark: #baseBenchmark.
 ]
 
+{ #category : #execution }
+SMarkRunner >> runSuite [
+
+	"Hook for subclasses, private API, do not call directly."
+	suite run
+
+]
+
 { #category : #accessing }
 SMarkRunner >> suite [
 	^ suite
@@ -206,7 +236,7 @@ SMarkRunner >> timedBenchmarkExecution: aSelector [
 	timer := self createTimer: 'total'.
 	
 	timer start.
-	result := suite perform: aSelector.
+	result := suite performBenchmarkSelector: aSelector.
 	timer stop.
 	suite processResult: result withTimer: timer.
 	
