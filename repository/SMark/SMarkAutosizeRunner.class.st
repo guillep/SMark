@@ -5,7 +5,7 @@ Class {
 		'targetTime',
 		'innerLoopIterations'
 	],
-	#category : 'SMark'
+	#category : #SMark
 }
 
 { #category : #defaults }
@@ -20,6 +20,12 @@ SMarkAutosizeRunner class >> defaultTargetTime [
 SMarkAutosizeRunner >> initialize [
 	super initialize.
 	targetTime := self class defaultTargetTime.
+]
+
+{ #category : #benchmarking }
+SMarkAutosizeRunner >> innerLoopIterations [
+
+	^ innerLoopIterations
 ]
 
 { #category : #benchmarking }

@@ -4,14 +4,15 @@ Richards is an OS kernel simulation benchmark, originally written in BCPL by Mar
 Class {
 	#name : #SMarkRichards,
 	#superclass : #SMarkSuite,
-	#category : 'SMark-Richards'
+	#category : #'SMark-Richards'
 }
 
 { #category : #benchs }
 SMarkRichards >> benchRichards [
 
+	self problemSize timesRepeat: [
 	RichObject initialize.
-	^ RichRunner start
+	RichRunner start]
 ]
 
 { #category : #benchs }
