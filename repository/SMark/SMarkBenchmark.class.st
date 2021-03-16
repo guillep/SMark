@@ -41,7 +41,7 @@ SMarkBenchmark >> runBenchmark: aString [
 { #category : #running }
 SMarkBenchmark >> runOn: aRunner [
 
-	suite performBenchmark: self benchmarkName.
+	aRunner performBenchmark: selector.
 	^ aRunner results at: self benchmarkName
 ]
 
