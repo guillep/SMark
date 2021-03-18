@@ -9,6 +9,8 @@ BaselineOfSMark >> baseline: spec [
 	<baseline>
 	spec for: #'common' do: [
 		spec package: 'Scripting'.
+		spec package: 'CL-Benchmarks-Game' with: [
+			spec requires: #(SMark) ].
 		spec package: 'SMark-DeltaBlue' with: [
 			spec requires: #(SMark) ].
 		spec package: 'SMark-Richards' with: [
