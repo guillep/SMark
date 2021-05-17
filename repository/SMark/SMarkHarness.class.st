@@ -147,12 +147,12 @@ SMarkHarness class >> usageRunner: usage [
 { #category : #helper }
 SMarkHarness class >> version [
 	(Smalltalk classNamed: #ConfigurationOfBenchmarking)
-		ifNotNilDo: [:cfg |
+		ifNotNil: [:cfg |
 			^ cfg project currentVersion versionNumber asString.
 		].
 	  
 	(Smalltalk classNamed: #MCPackage)
-		ifNotNilDo: [:mcp |
+		ifNotNil: [:mcp |
 			| package |
 			package := mcp named: 'SMark'.
 			package hasWorkingCopy ifTrue: [

@@ -68,7 +68,7 @@ SMarkHarnessArgumentParser >> determineRunner [
 			i := i + 1.
 			i <= numParams ifTrue: [
 				current := arguments at: i.
-				currentObj := (Smalltalk classNamed: current) ifNotNilDo: [:cls | cls new].
+				currentObj := (Smalltalk classNamed: current) ifNotNil: [:cls | cls new].
 			]
 		].
 ]
@@ -103,7 +103,7 @@ SMarkHarnessArgumentParser >> parse: argumentsArray [
 	
 	i := 2.
 	current := arguments at: i.
-	currentObj := (Smalltalk classNamed: current) ifNotNilDo: [:cls | cls new].
+	currentObj := (Smalltalk classNamed: current) ifNotNil: [:cls | cls new].
 		
 	self determineRunner.
 	self determineReporter.
