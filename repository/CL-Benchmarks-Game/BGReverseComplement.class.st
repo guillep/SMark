@@ -5,7 +5,7 @@ Class {
 		'assocFact',
 		'arrayFact'
 	],
-	#category : 'CL-Benchmarks-Game'
+	#category : #'CL-Benchmarks-Game'
 }
 
 { #category : #helpers }
@@ -233,8 +233,7 @@ BGReverseComplement >> readFasta: sequenceName from: input [
 { #category : #benchmarking }
 BGReverseComplement >> revcomp: n [
    | input output |
-   input := RWBinaryOrTextStream with: (BGFastaCache forFasta: n).
-   input reset.
+   input := (BGFastaCache forFasta: n) readStream.
    output := TextStream with: ByteString new.
 
    (arrayFact with: 'ONE' with: 'TWO' with: 'THREE') do: [:sequenceName |

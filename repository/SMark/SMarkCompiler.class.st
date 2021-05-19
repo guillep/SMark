@@ -35,5 +35,6 @@ SMarkCompiler >> benchCompiler [
 		blockTime := Time millisecondsToRun:
 						[i := 0.
 						 [(i := i + 1) <= nTimes] whileTrue: [aBlock value]].
-		^blockTime - emptyTime' ]
+		^blockTime - emptyTime';
+		compile ]
 ]

@@ -1,7 +1,7 @@
 Class {
 	#name : #BGTests,
 	#superclass : #TestCase,
-	#category : 'CL-Benchmarks-Game-Tests'
+	#category : #'CL-Benchmarks-Game-Tests'
 }
 
 { #category : #tests }
@@ -97,7 +97,6 @@ BGTests >> testMandelbrot [
 	| result |
 	
 	result := BGMandelbrot new mandelbrot2: 200.
-	result reset. "set possition to beginning"
 	
 	self assert: result contents equals: BGMandelbrot output.
 ]

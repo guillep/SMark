@@ -1,7 +1,7 @@
 Class {
 	#name : #BenchmarkGameSuite,
 	#superclass : #SMarkSuite,
-	#category : 'CL-Benchmarks-Game'
+	#category : #'CL-Benchmarks-Game'
 }
 
 { #category : #transporter }
@@ -53,7 +53,7 @@ BenchmarkGameSuite >> benchChameneosRedux [
 BenchmarkGameSuite >> benchFannkuchRedux [
    | f problemSize |
 	problemSize := self problemSize
-		ifNotNilDo: [:ps | ps ]
+		ifNotNil: [:ps | ps ]
 		ifNil: [ BGFannkuchRedux defaultProblemSize ].
    f := BGFannkuchRedux fannkuchRedux: problemSize to: (TextStream with: ByteString new).
    
@@ -67,7 +67,7 @@ BenchmarkGameSuite >> benchFasta [
 	| out problemSize |
 	out := TextStream with: ByteString new.
 	problemSize := self problemSize
-		ifNotNilDo: [:ps | ps ]
+		ifNotNil: [:ps | ps ]
 		ifNil:      [ BGFasta defaultProblemSize ].  
 	BGFasta fasta: problemSize to: out.
 ]
@@ -88,13 +88,11 @@ BenchmarkGameSuite >> benchKNucleotide [
 
 { #category : #benchmarking }
 BenchmarkGameSuite >> benchMandelbrot [
-	| result bench problemSize |
+	| bench problemSize |
 	bench := BGMandelbrot new.
 	problemSize := self problemSize ifNotNil: [:ps | ps ]
 							                 ifNil:    [ BGMandelbrot defaultProblemSize ].
-	result := bench mandelbrot2: problemSize.
-	result reset.
-	^ result contents
+	^ bench mandelbrot2: problemSize
 ]
 
 { #category : #benchmarking }

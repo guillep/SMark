@@ -35,6 +35,17 @@ SMarkRunner class >> execute: aSuite [
 ]
 
 { #category : #benchmarking }
+SMarkRunner class >> execute: aSuite problemSize: problemSize [
+	| runner |
+	runner := self new.
+	aSuite runner: runner.
+	runner suite: aSuite.
+	runner problemSize: problemSize.
+	runner execute.
+	^ runner
+]
+
+{ #category : #benchmarking }
 SMarkRunner class >> execute: aSuite with: nIterations [
 	| runner |
 	runner := self new.

@@ -1,7 +1,7 @@
 Class {
 	#name : #BGMandelbrot,
 	#superclass : #Object,
-	#category : 'CL-Benchmarks-Game'
+	#category : #'CL-Benchmarks-Game'
 }
 
 { #category : #defaults }
@@ -16,18 +16,17 @@ BGMandelbrot class >> output [
 
 { #category : #benchmarking }
 BGMandelbrot >> mandelbrot2: n [
-   | output outputArray |
-   (output := MultiByteBinaryOrTextStream with: ByteString new)
-      nextPutAll: 'P4'; lf; print: n; space; print: n; lf";
-      binary".
 
-	outputArray := Array new: n * n / 8.
-
-   self mandelbrot2: n to: outputArray.
-
-	output nextPutAll: outputArray.
-
-   ^ output
+	^ ByteArray streamContents: [ :stream | | outputArray |
+		(ZnCharacterWriteStream on: stream)
+			nextPutAll: 'P4';
+			lf;
+			print: n; space; print: n; lf.
+			
+		outputArray := ByteArray new: (n * n) / 8.
+	   self mandelbrot2: n to: outputArray.
+		stream nextPutAll: outputArray
+	]
 ]
 
 { #category : #benchmarking }
