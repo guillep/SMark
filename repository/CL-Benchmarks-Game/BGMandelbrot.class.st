@@ -23,7 +23,7 @@ BGMandelbrot >> mandelbrot2: n [
 			lf;
 			print: n; space; print: n; lf.
 			
-		outputArray := ByteArray new: (n * n) / 8.
+		outputArray := ByteArray new: ((n * n) / 4) ceiling + 1.
 	   self mandelbrot2: n to: outputArray.
 		stream nextPutAll: outputArray
 	]
