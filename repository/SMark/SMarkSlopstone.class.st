@@ -61,8 +61,8 @@ SMarkSlopstone >> benchStone [
 	1 to: n do: [:i | self doStringAccess   ].
 	1 to: n do: [:i | self doObjectCreation ].
 	1 to: n do: [:i | self doObjectCopy     ].
-	1 to: n do: [:i | self doPerform        ]."
-	1 to: n do: [:i | self doBlockValue     ]."
+	1 to: n do: [:i | self doPerform        ].
+	1 to: n do: [:i | self doBlockValue     ].
 
 ]
 
