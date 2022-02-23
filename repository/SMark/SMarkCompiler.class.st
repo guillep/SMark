@@ -16,7 +16,7 @@ SMarkCompiler class >> defaultNumberOfProcesses [
 
 { #category : #'script entry' }
 SMarkCompiler class >> defaultProblemSize [
-	^ 100000
+	^ 30
 ]
 
 { #category : #benchmarking }
