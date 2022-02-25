@@ -17,7 +17,7 @@ SMarkRichards >> benchRichards [
 
 { #category : #benchs }
 SMarkRichards >> defaultProblemSize [
-	^ 50
+	^ 2
 ]
 
 { #category : #benchs }
