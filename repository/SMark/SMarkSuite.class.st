@@ -207,13 +207,13 @@ SMarkSuite >> run [
 	"Executes all the benchmarks in the suite, 
 	 coordinating with the runner when necessary"
 	
-	| potentialBenchmarkSelectors expandedParamMatrix |
+	| expandedParamMatrix |
 	
 	expandedParamMatrix := self class benchmarkParameters expandMatrix.
 
-	expandedParamMatrix ifEmpty: ["TODO"].
+	expandedParamMatrix ifEmpty: [^ self performBenchmarks].
 
-	expandedParamMatrix do: [ :expandedParameters | |internalSuite|
+	expandedParamMatrix do: [ :expandedParameters |
 		expandedParameters do: [ :param | self instVarNamed: param selector put: param valuable ].
 		self performBenchmarks.
 	].
