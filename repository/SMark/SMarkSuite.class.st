@@ -131,9 +131,10 @@ SMarkSuite >> benchmarkNameForSelector: selector [
 		ifTrue: [ selector copyFrom: 6 to: selector size ]
 		ifFalse: [ selector asSymbol ].
 	currentParams := self currentBenchmarkParameters.
-	stream := TextStream on: String new.
-	currentParams printElementsOn: stream.
-	^ benchName, stream contents.
+	currentParams ifEmpty: [ ^ benchName ] ifNotEmpty: [
+		stream := TextStream on: String new.
+		currentParams printElementsOn: stream.
+		^ benchName, stream contents ]
 ]
 
 { #category : #running }
