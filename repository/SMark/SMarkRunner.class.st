@@ -246,9 +246,11 @@ SMarkRunner >> timedBenchmarkExecution: aSelector [
 
 	timer := self createTimer: 'total'.
 	
+	Smalltalk garbageCollect.
 	timer start.
 	result := suite performBenchmarkSelector: aSelector.
 	timer stop.
+
 	suite processResult: result withTimer: timer.
 	
 	self recordResults: timer for: aSelector.

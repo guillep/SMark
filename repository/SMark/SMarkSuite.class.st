@@ -37,6 +37,12 @@ SMarkSuite class >> benchmarkForSelector: aSelector [
 		yourself
 ]
 
+{ #category : #benchmarking }
+SMarkSuite class >> benchmarkParameters [
+
+  ^ ParametrizedTestMatrix new
+]
+
 { #category : #defaults }
 SMarkSuite class >> defaultProblemSize [
 	^ nil
@@ -117,10 +123,18 @@ SMarkSuite class >> runOnly: aSelector iterations: anInteger [
 
 { #category : #helper }
 SMarkSuite >> benchmarkNameForSelector: selector [
+
 	"Extracts the actual name of the benchmark from the selector"
-	(selector beginsWith: #bench) ifTrue: [ ^ selector copyFrom: 6 to: selector size].
-	^ selector asSymbol
-	
+
+	| benchName currentParams stream |
+	benchName := (selector beginsWith: #bench)
+		ifTrue: [ selector copyFrom: 6 to: selector size ]
+		ifFalse: [ selector asSymbol ].
+	currentParams := self currentBenchmarkParameters.
+	currentParams ifEmpty: [ ^ benchName ] ifNotEmpty: [
+		stream := TextStream on: String new.
+		currentParams printElementsOn: stream.
+		^ benchName, stream contents ]
 ]
 
 { #category : #running }
@@ -131,15 +145,40 @@ SMarkSuite >> cleanUpInstanceVariables [
 		self instVarNamed: name put: nil ]
 ]
 
+{ #category : #benchmarking }
+SMarkSuite >> currentBenchmarkParameters [ 
+
+	^ (self class benchmarkParameters selectors collect: [ :selector | (selector -> (self instVarNamed: selector)) ]) asDictionary
+]
+
 { #category : #running }
 SMarkSuite >> instanceVariablesToPreserve [
-	^ #(runner)
+	^ { #runner. self paramInstanceVariables } flattened
+]
+
+{ #category : #accessing }
+SMarkSuite >> paramInstanceVariables [
+
+	^ self class benchmarkParameters selectors.
 ]
 
 { #category : #running }
 SMarkSuite >> performBenchmarkSelector: aSelector [
 
 	^ self perform: aSelector
+]
+
+{ #category : #benchmarking }
+SMarkSuite >> performBenchmarks [
+
+	| potentialBenchmarkSelectors |
+	selectedBenchmarks
+		ifNotNil: [ potentialBenchmarkSelectors := selectedBenchmarks ]
+		ifNil: [ potentialBenchmarkSelectors := self class allSelectors ].
+
+	potentialBenchmarkSelectors do: [ :selector | 
+		(self shouldRunSelector: selector) ifTrue: [ 
+			runner performBenchmark: selector ] ]
 ]
 
 { #category : #benchmarking }
@@ -169,18 +208,16 @@ SMarkSuite >> run [
 	"Executes all the benchmarks in the suite, 
 	 coordinating with the runner when necessary"
 	
-	| potentialBenchmarkSelectors |
-	selectedBenchmarks
-		ifNotNil: [ potentialBenchmarkSelectors := selectedBenchmarks ]
-		ifNil:    [ potentialBenchmarkSelectors := self class allSelectors ].				
+	| expandedParamMatrix |
 	
-	potentialBenchmarkSelectors
-		do: [ :selector |
-			(self shouldRunSelector: selector)
-				ifTrue: [
-					runner performBenchmark: selector ]
-		].
-	
+	expandedParamMatrix := self class benchmarkParameters expandMatrix.
+
+	expandedParamMatrix ifEmpty: [^ self performBenchmarks].
+
+	expandedParamMatrix do: [ :expandedParameters |
+		expandedParameters do: [ :param | self instVarNamed: param selector put: param valuable ].
+		self performBenchmarks.
+	].
 ]
 
 { #category : #benchmarking }
