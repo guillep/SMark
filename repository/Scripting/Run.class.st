@@ -4,7 +4,7 @@ Run is a class that will take the command line arguments and will try to evaluat
 Class {
 	#name : #Run,
 	#superclass : #Object,
-	#category : 'Scripting'
+	#category : #'Scripting-Core'
 }
 
 { #category : #'script entry' }
@@ -17,6 +17,7 @@ Run class >> run: args [
 	ScriptConsole println: str.
 	ScriptConsole println: args asString.
 	ScriptConsole println: 'Going to evaluate the string'.
-	[ self compiler evaluate: str. ]
-		ifError: [:err :rcvr | ScriptConsole println: 'Error: ', err].
+	[ self compiler evaluate: str ]
+	on: Error
+	do: [ : err | ScriptConsole println: 'Error: ', err ].
 ]

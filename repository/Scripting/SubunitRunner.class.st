@@ -12,7 +12,7 @@ Class {
 	#classVars : [
 		'DefaultOutputTarget'
 	],
-	#category : 'Scripting'
+	#category : #'Scripting-Core'
 }
 
 { #category : #defaults }
@@ -50,7 +50,8 @@ SubunitRunner class >> run: arguments [
 
 { #category : #running }
 SubunitRunner class >> runAllTests [
-	self runClasses: Smalltalk allClasses named: 'All'.
+
+	self runClasses: Smalltalk globals allClasses named: 'All'
 ]
 
 { #category : #running }
@@ -79,7 +80,10 @@ SubunitRunner class >> runClasses: aCollectionOfClasses named: aString [
 
 { #category : #running }
 SubunitRunner class >> runPackage: aString [
-	^ self runClasses: (PackageInfo named: aString) classes named: aString
+
+	^ self
+		  runClasses: (RPackageOrganizer default packageNamed: aString) classes
+		  named: aString
 ]
 
 { #category : #running }
