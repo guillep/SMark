@@ -9,8 +9,16 @@ Class {
 	#tag : 'Tests'
 }
 
+{ #category : 'tests' }
+SMarkReporterTest >> outputFile [
+
+	^ 'report.txt' asFileReference
+]
+
 { #category : 'running' }
 SMarkReporterTest >> setUp [
+
+	super setUp.
 	runner := SMarkTestRunnerSuiteForAutosizing run.
 ]
 
@@ -20,6 +28,13 @@ SMarkReporterTest >> string: str includes: subStr [
 	(str respondsTo: #includesSubstring:)
 		ifTrue:  [ ^ str includesSubstring: subStr ] "2.0"
 		ifFalse: [ ^ str includesSubString: subStr ] "1.4"
+]
+
+{ #category : 'running' }
+SMarkReporterTest >> tearDown [ 
+
+	self outputFile ensureDelete.
+	super tearDown.
 ]
 
 { #category : 'tests' }
@@ -50,4 +65,19 @@ SMarkReporterTest >> testConvenienceReportOnRunner [
 	
 	self assert: (self string: out includes: 'Small').
 	self assert: (self string: out includes: 'Big').
+]
+
+{ #category : 'tests' }
+SMarkReporterTest >> testReportOnFileWriteContents [
+	| stream outputContents |
+
+	stream := self outputFile writeStream.
+	runner := SMarkTestAutosizeRunner execute: SMarkTestRunnerSuiteForAutosizing new.
+	"Check whether it reported as expected"
+	SMarkReporter reportFor: runner on: stream.
+	
+	outputContents := self outputFile readStream contents.
+
+	self assert: (self string: outputContents includes: 'Small').
+	self assert: (self string: outputContents includes: 'Big').
 ]
