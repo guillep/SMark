@@ -5,17 +5,18 @@ A subclass can measure alternative metrics, or for instance use different time s
 A subclass of SMarkRunner can then use the custom timer class by overriding SMarkRunner class >> #defaultTimer.
 "
 Class {
-	#name : #SMarkTimer,
-	#superclass : #Object,
+	#name : 'SMarkTimer',
+	#superclass : 'Object',
 	#instVars : [
 		'startTime',
 		'elapsedTime',
 		'name'
 	],
-	#category : 'SMark'
+	#category : 'SMark',
+	#package : 'SMark'
 }
 
-{ #category : #'instance creation' }
+{ #category : 'instance creation' }
 SMarkTimer class >> new: aName [
 	| timer |
 	
@@ -25,40 +26,40 @@ SMarkTimer class >> new: aName [
 	^timer
 ]
 
-{ #category : #timing }
+{ #category : 'timing' }
 SMarkTimer >> currentMillis [
 
 	^ Time millisecondClockValue
 ]
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 SMarkTimer >> initialize [
 	super initialize.
 	elapsedTime := 0
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 SMarkTimer >> name [
 	^name
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 SMarkTimer >> name: aString [
 	name := aString 
 ]
 
-{ #category : #timing }
+{ #category : 'timing' }
 SMarkTimer >> reset [
 	startTime := 0.
 	elapsedTime := 0.
 ]
 
-{ #category : #timing }
+{ #category : 'timing' }
 SMarkTimer >> start [
 	startTime := self currentMillis.
 ]
 
-{ #category : #timing }
+{ #category : 'timing' }
 SMarkTimer >> stop [
 	| elapsedInThisPeriod current |
 	current := self currentMillis.
@@ -68,7 +69,7 @@ SMarkTimer >> stop [
 	elapsedTime := elapsedTime + elapsedInThisPeriod.
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 SMarkTimer >> totalTime [
 	^elapsedTime
 ]

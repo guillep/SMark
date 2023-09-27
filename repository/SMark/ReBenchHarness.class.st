@@ -5,27 +5,28 @@ It is especially meant to be used together with ReBench, a tool to execute and d
 See: https://github.com/smarr/ReBench#readme
 "
 Class {
-	#name : #ReBenchHarness,
-	#superclass : #SMarkHarness,
-	#category : 'SMark'
+	#name : 'ReBenchHarness',
+	#superclass : 'SMarkHarness',
+	#category : 'SMark',
+	#package : 'SMark'
 }
 
-{ #category : #helper }
+{ #category : 'helper' }
 ReBenchHarness class >> defaultArgumentParser [
 	^ ReBenchHarnessArgumentParser
 ]
 
-{ #category : #defaults }
+{ #category : 'defaults' }
 ReBenchHarness class >> defaultReporter [
 	^ ReBenchReporter
 ]
 
-{ #category : #defaults }
+{ #category : 'defaults' }
 ReBenchHarness class >> defaultRunner [
 	^ SMarkWeakScalingRunner
 ]
 
-{ #category : #helper }
+{ #category : 'helper' }
 ReBenchHarness class >> usageBenchmarkParameters: usage [
 	^ usage,		' processes          optional, number of processes/threads used by the benchmarks', String crlf,
 				' inner-iterations   optional, number of iterations done by a single process', String crlf,
@@ -33,7 +34,7 @@ ReBenchHarness class >> usageBenchmarkParameters: usage [
 				
 ]
 
-{ #category : #helper }
+{ #category : 'helper' }
 ReBenchHarness class >> usageHeader [
 	| usage |
 	usage := 'SMark Benchmark Framework, version: ', self version, String crlf.
@@ -49,13 +50,13 @@ ReBenchHarness class >> usageHeader [
 	^ usage
 ]
 
-{ #category : #helper }
+{ #category : 'helper' }
 ReBenchHarness class >> usageReporter: usage [
 	"Will rely on default, which is good for ReBench, so do not advertise option."
 	^ usage
 ]
 
-{ #category : #helper }
+{ #category : 'helper' }
 ReBenchHarness class >> usageRunner: usage [
 	"Will rely on default, which is good for ReBench, so do not advertise option."
 	^ usage

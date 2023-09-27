@@ -1,20 +1,22 @@
 Class {
-	#name : #SMarkWeakScalingRunnerTest,
-	#superclass : #SMarkRunnerTest,
-	#category : 'SMark-Tests'
+	#name : 'SMarkWeakScalingRunnerTest',
+	#superclass : 'SMarkRunnerTest',
+	#category : 'SMark-Tests',
+	#package : 'SMark',
+	#tag : 'Tests'
 }
 
-{ #category : #'as yet unclassified' }
+{ #category : 'as yet unclassified' }
 SMarkWeakScalingRunnerTest class >> shouldInheritSelectors [
 	^ true
 ]
 
-{ #category : #helper }
+{ #category : 'helper' }
 SMarkWeakScalingRunnerTest >> runnerClass [
 	^ SMarkTestWeakScalingRunner
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 SMarkWeakScalingRunnerTest >> testInnerIterations [
 	"Test the semantics of the inner loop parameter"
 	| runner results |
@@ -62,7 +64,7 @@ SMarkWeakScalingRunnerTest >> testInnerIterations [
 	self assert: 4           equals: (results at: #NotifyRunner) size.
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 SMarkWeakScalingRunnerTest >> testWeakScaling3Processes [
 	"test with small number of processes and varying number of iterations"
 	| runner results |
@@ -78,7 +80,7 @@ SMarkWeakScalingRunnerTest >> testWeakScaling3Processes [
 	self assert: 2 equals: (results at: #NotifyRunner) size.
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 SMarkWeakScalingRunnerTest >> testWeakScalingFewProcesses [
 	"test with small number of processes and varying number of iterations"
 	| runner results |
@@ -94,7 +96,7 @@ SMarkWeakScalingRunnerTest >> testWeakScalingFewProcesses [
 	
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 SMarkWeakScalingRunnerTest >> testWeakScalingManyProcesses [
 	"test with large number of processes and varying number of iterations"
 	| runner results |

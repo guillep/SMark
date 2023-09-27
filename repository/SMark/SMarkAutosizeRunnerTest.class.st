@@ -1,20 +1,22 @@
 Class {
-	#name : #SMarkAutosizeRunnerTest,
-	#superclass : #SMarkRunnerTest,
-	#category : 'SMark-Tests'
+	#name : 'SMarkAutosizeRunnerTest',
+	#superclass : 'SMarkRunnerTest',
+	#category : 'SMark-Tests',
+	#package : 'SMark',
+	#tag : 'Tests'
 }
 
-{ #category : #'as yet unclassified' }
+{ #category : 'as yet unclassified' }
 SMarkAutosizeRunnerTest class >> shouldInheritSelectors [
 	^ true
 ]
 
-{ #category : #helper }
+{ #category : 'helper' }
 SMarkAutosizeRunnerTest >> runnerClass [
 	^ SMarkTestAutosizeRunner
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 SMarkAutosizeRunnerTest >> testAutosizing [
 	"Ensure that the runtime is automatically sized up to a predefined value"
 	| runner results big small runTime benchmarkSum |
@@ -57,7 +59,7 @@ SMarkAutosizeRunnerTest >> testAutosizing [
 
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 SMarkAutosizeRunnerTest >> testAutosizingBaseBenchmark [
 	"Ensure that baseBenchmarks are not delivering any data since I do not see how that could be done nicely"
 	| runner results |
@@ -75,7 +77,7 @@ SMarkAutosizeRunnerTest >> testAutosizingBaseBenchmark [
 
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 SMarkAutosizeRunnerTest >> testBaseBenchmark [
 	"Different from base test: Ensure the base benchmark is NOT executed when available"
 	
@@ -85,7 +87,7 @@ SMarkAutosizeRunnerTest >> testBaseBenchmark [
 	self deny: runner baseBenchmarkExecuted  
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 SMarkAutosizeRunnerTest >> testExecute [
 	"This test is slightly different from the one in the base class"
 	| runner results performedBenchmarks |
@@ -104,7 +106,7 @@ SMarkAutosizeRunnerTest >> testExecute [
 	self assert: (((results at: #baseBenchmark) at: 1) isKindOf: SMarkResult).
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 SMarkAutosizeRunnerTest >> testIterations [
 	| runner |
 	"This test is different then the one in the base class, it is not direct, but just looks at the results"

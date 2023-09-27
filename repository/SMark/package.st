@@ -1,1 +1,1 @@
-Package { #name : #SMark }
+Package { #name : 'SMark' }

@@ -23,8 +23,8 @@ originak code by
 
 "
 Class {
-	#name : #SMarkSmopstone,
-	#superclass : #SMarkSuite,
+	#name : 'SMarkSmopstone',
+	#superclass : 'SMarkSuite',
 	#instVars : [
 		'ordCollectionFact',
 		'intervalFact',
@@ -34,10 +34,12 @@ Class {
 		'setFact',
 		'pointFact'
 	],
-	#category : 'SMark-Classic'
+	#category : 'SMark-Classic',
+	#package : 'SMark',
+	#tag : 'Classic'
 }
 
-{ #category : #benchmarking }
+{ #category : 'benchmarking' }
 SMarkSmopstone >> benchStone [
 	| n primes strings set |
 	
@@ -55,12 +57,12 @@ SMarkSmopstone >> benchStone [
 	self sorcerersApprentice: n.
 ]
 
-{ #category : #defaults }
+{ #category : 'defaults' }
 SMarkSmopstone >> defaultProblemSize [
 	^ 80
 ]
 
-{ #category : #'stone benchmarks' }
+{ #category : 'stone benchmarks' }
 SMarkSmopstone >> fractonacci: n [ 
 	"Return something like the fibonacci function of n but
 	using fractional numbers rather than whole ones. The
@@ -80,7 +82,7 @@ SMarkSmopstone >> fractonacci: n [
 		ifFalse: [1]
 ]
 
-{ #category : #'stone benchmarks' }
+{ #category : 'stone benchmarks' }
 SMarkSmopstone >> primesUpTo: n [
 	"modified by nishis"
 
@@ -105,7 +107,7 @@ SMarkSmopstone >> primesUpTo: n [
 	^ lowPrimes , highPrimes
 ]
 
-{ #category : #benchmarking }
+{ #category : 'benchmarking' }
 SMarkSmopstone >> problemSize [
 	<omniUnenforced> "Hint for the OMOP that it is part of the meta infrastructure"
 	| ps |
@@ -116,7 +118,7 @@ SMarkSmopstone >> problemSize [
 	^ ps
 ]
 
-{ #category : #benchmarking }
+{ #category : 'benchmarking' }
 SMarkSmopstone >> readme [
    "STEFAN: use the original benchmarks, but do not use original way
             of reporting results. Rely on the SMark reporting instead."
@@ -214,7 +216,7 @@ SMarkSmopstone >> readme [
 	^ self
 ]
 
-{ #category : #'stone benchmarks' }
+{ #category : 'stone benchmarks' }
 SMarkSmopstone >> setFrom: collection [
 	"Form a set from collection and return it.
 
@@ -228,7 +230,7 @@ SMarkSmopstone >> setFrom: collection [
 	^ setFact withAll: collection
 ]
 
-{ #category : #running }
+{ #category : 'running' }
 SMarkSmopstone >> setUp [
 	ordCollectionFact := OrderedCollection.
 	intervalFact      := Interval.
@@ -239,7 +241,7 @@ SMarkSmopstone >> setUp [
 	pointFact         := Point.
 ]
 
-{ #category : #'stone benchmarks' }
+{ #category : 'stone benchmarks' }
 SMarkSmopstone >> sorcerersApprentice: m [
 	"modified by nishis"
 
@@ -337,7 +339,7 @@ SMarkSmopstone >> sorcerersApprentice: m [
 	^counts
 ]
 
-{ #category : #'stone benchmarks' }
+{ #category : 'stone benchmarks' }
 SMarkSmopstone >> sort: collection [
 	"Form a sorted collection from collection and return it.
 
@@ -348,7 +350,7 @@ SMarkSmopstone >> sort: collection [
 	^collection as: sortedColFact
 ]
 
-{ #category : #'stone benchmarks' }
+{ #category : 'stone benchmarks' }
 SMarkSmopstone >> streamTestsOn: integers [ 
 	"modified by nishis"
 	"Test steaming operations on the collection of integers. 
@@ -392,7 +394,7 @@ SMarkSmopstone >> streamTestsOn: integers [
 	integers = floats ifFalse: [self error: 'Numbers do not compare.']
 ]
 
-{ #category : #'stone benchmarks' }
+{ #category : 'stone benchmarks' }
 SMarkSmopstone >> stringsUpTo: n [ 
 	"Return a collection of strings representing the integers from 1 
 	to n with their digits reversed. 

@@ -1,75 +1,76 @@
 Class {
-	#name : #SMarkBenchmark,
-	#superclass : #Object,
+	#name : 'SMarkBenchmark',
+	#superclass : 'Object',
 	#instVars : [
 		'suite',
 		'selector'
 	],
-	#category : #SMark
+	#category : 'SMark',
+	#package : 'SMark'
 }
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 SMarkBenchmark >> benchmarkName [
 	
 	^ suite benchmarkNameForSelector: selector 
 ]
 
-{ #category : #helper }
+{ #category : 'helper' }
 SMarkBenchmark >> benchmarkNameForSelector: aSelector [
 
 	^ suite benchmarkNameForSelector: aSelector
 ]
 
-{ #category : #running }
+{ #category : 'running' }
 SMarkBenchmark >> performBenchmarkSelector: aSelector [
 
 	^ suite performBenchmarkSelector: aSelector
 ]
 
-{ #category : #benchmarking }
+{ #category : 'benchmarking' }
 SMarkBenchmark >> processResult: aBoolean withTimer: aSMarkTimer [ 
 
 	^ suite processResult: aBoolean withTimer: aSMarkTimer
 ]
 
-{ #category : #running }
+{ #category : 'running' }
 SMarkBenchmark >> runBenchmark: aString [ 
 
 	^ suite runBenchmark: aString
 ]
 
-{ #category : #running }
+{ #category : 'running' }
 SMarkBenchmark >> runOn: aRunner [
 
 	aRunner performBenchmark: selector.
 	^ aRunner results at: self benchmarkName
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 SMarkBenchmark >> runner: aRunner [
 
 	^ suite runner: aRunner
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 SMarkBenchmark >> selector [
 
 	^ selector
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 SMarkBenchmark >> selector: anObject [
 
 	selector := anObject
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 SMarkBenchmark >> suite [
 
 	^ suite
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 SMarkBenchmark >> suite: anObject [
 
 	suite := anObject

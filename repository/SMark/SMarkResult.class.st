@@ -8,53 +8,54 @@ A benchmark result is characterized by:
 A benchmark can produced multiple resuts for different criteria. The standard criterion is #total.
 "
 Class {
-	#name : #SMarkResult,
-	#superclass : #Object,
+	#name : 'SMarkResult',
+	#superclass : 'Object',
 	#instVars : [
 		'time',
 		'benchName',
 		'suite',
 		'criteria'
 	],
-	#category : 'SMark'
+	#category : 'SMark',
+	#package : 'SMark'
 }
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 SMarkResult >> benchmarkName [
 	^ benchName
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 SMarkResult >> benchmarkName: aString [
 	benchName := aString
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 SMarkResult >> criteria [
 	^ criteria
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 SMarkResult >> criteria: aCollectionOfTimers [
 	criteria := aCollectionOfTimers
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 SMarkResult >> suite [
 	^ suite
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 SMarkResult >> suite: aBenchmarkSuite [
 	suite := aBenchmarkSuite
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 SMarkResult >> total [
 	^ time
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 SMarkResult >> total: aTime [
 	time := aTime
 ]

@@ -1,10 +1,11 @@
 Class {
-	#name : #ReBenchHarnessArgumentParser,
-	#superclass : #SMarkHarnessArgumentParser,
-	#category : 'SMark'
+	#name : 'ReBenchHarnessArgumentParser',
+	#superclass : 'SMarkHarnessArgumentParser',
+	#category : 'SMark',
+	#package : 'SMark'
 }
 
-{ #category : #'argument parsing' }
+{ #category : 'argument parsing' }
 ReBenchHarnessArgumentParser >> determineBenchmarkParametersFromArguments [
 	i := i + 1.
 	i <= numParams ifTrue: [
@@ -20,17 +21,17 @@ ReBenchHarnessArgumentParser >> determineBenchmarkParametersFromArguments [
 	].
 ]
 
-{ #category : #'argument parsing' }
+{ #category : 'argument parsing' }
 ReBenchHarnessArgumentParser >> determineReporter [
 	reporter := harness defaultReporter new.
 ]
 
-{ #category : #'argument parsing' }
+{ #category : 'argument parsing' }
 ReBenchHarnessArgumentParser >> determineRunner [
 	runner := harness defaultRunner new.
 ]
 
-{ #category : #helper }
+{ #category : 'helper' }
 ReBenchHarnessArgumentParser >> instructRunner [
 	super instructRunner.
 	

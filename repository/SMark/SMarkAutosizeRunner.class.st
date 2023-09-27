@@ -1,14 +1,15 @@
 Class {
-	#name : #SMarkAutosizeRunner,
-	#superclass : #SMarkRunner,
+	#name : 'SMarkAutosizeRunner',
+	#superclass : 'SMarkRunner',
 	#instVars : [
 		'targetTime',
 		'innerLoopIterations'
 	],
-	#category : #SMark
+	#category : 'SMark',
+	#package : 'SMark'
 }
 
-{ #category : #defaults }
+{ #category : 'defaults' }
 SMarkAutosizeRunner class >> defaultTargetTime [
 	"300 milliseconds seems to be a reasonable target time for most problems.
 	 It is a compromise between the general measurment noise as well as timer accuracy
@@ -16,19 +17,19 @@ SMarkAutosizeRunner class >> defaultTargetTime [
 	^ 300
 ]
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 SMarkAutosizeRunner >> initialize [
 	super initialize.
 	targetTime := self class defaultTargetTime.
 ]
 
-{ #category : #benchmarking }
+{ #category : 'benchmarking' }
 SMarkAutosizeRunner >> innerLoopIterations [
 
 	^ innerLoopIterations
 ]
 
-{ #category : #benchmarking }
+{ #category : 'benchmarking' }
 SMarkAutosizeRunner >> performBenchmark: aSelector [
 	"First determine a useful number of inner loop iterations until the targetTime is reached."
 	| execTime i |
@@ -49,7 +50,7 @@ SMarkAutosizeRunner >> performBenchmark: aSelector [
 	^ super performBenchmark: aSelector.
 ]
 
-{ #category : #benchmarking }
+{ #category : 'benchmarking' }
 SMarkAutosizeRunner >> runBaseBenchmark [
 	"baseBenchmark is not supported with autosizing. I do not see how that can be made possible since all different benchmarks will have different number of iterations, and the only way how a consistent baseline could be found would be to normalize the results, but well, incorporating the baseline measurement with the statistical evaluation is harder than just substracting a one time value..., I am not going to do that here for the moment. Stefan 2011-03-20"
 	
@@ -60,19 +61,19 @@ SMarkAutosizeRunner >> runBaseBenchmark [
 	self recordResults: (self class defaultTimer new: 'total') for: #baseBenchmark  
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 SMarkAutosizeRunner >> targetTime [
 	"Target time in milliseconds"
 	^ targetTime
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 SMarkAutosizeRunner >> targetTime: anIntInMilliseconds [
 	"Target time in milliseconds"
 	targetTime := anIntInMilliseconds
 ]
 
-{ #category : #benchmarking }
+{ #category : 'benchmarking' }
 SMarkAutosizeRunner >> timedBenchmarkExecution: aSelector [
 	"Will do a timed execution of the benchmark and return the result timer"
 	| timer |

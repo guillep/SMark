@@ -1,16 +1,17 @@
 Class {
-	#name : #SMarkWeakScalingRunnerExecutor,
-	#superclass : #Object,
+	#name : 'SMarkWeakScalingRunnerExecutor',
+	#superclass : 'Object',
 	#instVars : [
 		'numInnerIterations',
 		'benchmarkSelector',
 		'suite',
 		'runner'
 	],
-	#category : 'SMark'
+	#category : 'SMark',
+	#package : 'SMark'
 }
 
-{ #category : #'as yet unclassified' }
+{ #category : 'as yet unclassified' }
 SMarkWeakScalingRunnerExecutor class >> createFor: aSelector for: numIterations with: aRunner and: aSuite [
 	| o |
 	o := self new.
@@ -21,17 +22,17 @@ SMarkWeakScalingRunnerExecutor class >> createFor: aSelector for: numIterations 
 	^ ([ o run ] newProcess)
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 SMarkWeakScalingRunnerExecutor >> benchmarkSelector: aSelector [
 	benchmarkSelector := aSelector
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 SMarkWeakScalingRunnerExecutor >> innerIterations: anInt [
 	numInnerIterations := anInt
 ]
 
-{ #category : #benchmarking }
+{ #category : 'benchmarking' }
 SMarkWeakScalingRunnerExecutor >> run [
 	1 to: numInnerIterations do: [:i |
 		suite perform: benchmarkSelector.].
@@ -39,12 +40,12 @@ SMarkWeakScalingRunnerExecutor >> run [
 	runner executorCompleted.
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 SMarkWeakScalingRunnerExecutor >> runner: aRunner [
 	runner := aRunner
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 SMarkWeakScalingRunnerExecutor >> suite: aSuite [
 	suite := aSuite
 ]

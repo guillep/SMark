@@ -1,10 +1,12 @@
 Class {
-	#name : #SMarkTimerTest,
-	#superclass : #TestCase,
-	#category : 'SMark-Tests'
+	#name : 'SMarkTimerTest',
+	#superclass : 'TestCase',
+	#category : 'SMark-Tests',
+	#package : 'SMark',
+	#tag : 'Tests'
 }
 
-{ #category : #tests }
+{ #category : 'tests' }
 SMarkTimerTest >> testName [
 	| timer |
 	timer := SMarkTimer new.
@@ -16,7 +18,7 @@ SMarkTimerTest >> testName [
 	self assert: timer name equals: #foo.
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 SMarkTimerTest >> testReset [
 	| timer |
 	timer := SMarkTimer new.
@@ -32,7 +34,7 @@ SMarkTimerTest >> testReset [
 	self assert: timer totalTime equals: 0.
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 SMarkTimerTest >> testStartStop [
 	| timer |
 	timer := SMarkTimer new.
@@ -48,7 +50,7 @@ SMarkTimerTest >> testStartStop [
 	self assert: (timer totalTime >= 10).
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 SMarkTimerTest >> testTotalTimeWithResume [
 	| timer |
 	timer := SMarkTimer new.

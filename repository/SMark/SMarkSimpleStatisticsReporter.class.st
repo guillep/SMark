@@ -1,10 +1,11 @@
 Class {
-	#name : #SMarkSimpleStatisticsReporter,
-	#superclass : #SMarkReporter,
-	#category : 'SMark'
+	#name : 'SMarkSimpleStatisticsReporter',
+	#superclass : 'SMarkReporter',
+	#category : 'SMark',
+	#package : 'SMark'
 }
 
-{ #category : #statistics }
+{ #category : 'statistics' }
 SMarkSimpleStatisticsReporter >> confidenceVariance: times [
 	| numMeasurements |
 	numMeasurements := times size.
@@ -16,7 +17,7 @@ SMarkSimpleStatisticsReporter >> confidenceVariance: times [
 	^ (self studentsTConfidenceFactorFor: numMeasurements) * (times stdev) / (numMeasurements asFloat sqrt)
 ]
 
-{ #category : #statistics }
+{ #category : 'statistics' }
 SMarkSimpleStatisticsReporter >> gaussianConfidenceFactor [
 	"used for large probe counts >= 30"
 	"1 ~ 68.27%"
@@ -25,7 +26,7 @@ SMarkSimpleStatisticsReporter >> gaussianConfidenceFactor [
 	^ 1.644853626951
 ]
 
-{ #category : #reporting }
+{ #category : 'reporting' }
 SMarkSimpleStatisticsReporter >> reportAllRuns: aListOfResults of: benchmark [
 	| criteria |
 
@@ -39,7 +40,7 @@ SMarkSimpleStatisticsReporter >> reportAllRuns: aListOfResults of: benchmark [
 	].
 ]
 
-{ #category : #reporting }
+{ #category : 'reporting' }
 SMarkSimpleStatisticsReporter >> reportResult: aResultsArray for: aCriterion of: benchmark [
 	| convidenceVariance significantDigits |
 
@@ -63,13 +64,13 @@ SMarkSimpleStatisticsReporter >> reportResult: aResultsArray for: aCriterion of:
 	convidenceVariance printOn: stream showingDecimalPlaces: significantDigits.
 ]
 
-{ #category : #helper }
+{ #category : 'helper' }
 SMarkSimpleStatisticsReporter >> resultsFor: aCriterion from: aListOfResults [
 	^aListOfResults collect: [:result | (result criteria at: aCriterion) totalTime]
 	
 ]
 
-{ #category : #statistics }
+{ #category : 'statistics' }
 SMarkSimpleStatisticsReporter >> significantDigits: confidenceVariance [
 	confidenceVariance = 0 
 		ifTrue: [ ^ 2].
@@ -80,7 +81,7 @@ SMarkSimpleStatisticsReporter >> significantDigits: confidenceVariance [
 	^ 1 - (confidenceVariance log floor)
 ]
 
-{ #category : #statistics }
+{ #category : 'statistics' }
 SMarkSimpleStatisticsReporter >> studentsTConfidenceFactorFor: aNumberOfMeasurements [
 	"used for small probe counts < 30"
 	"the students T distribution sucks to calculate since the value depends on the probeCout"
@@ -121,7 +122,7 @@ SMarkSimpleStatisticsReporter >> studentsTConfidenceFactorFor: aNumberOfMeasurem
 	
 ]
 
-{ #category : #helper }
+{ #category : 'helper' }
 SMarkSimpleStatisticsReporter >> totalResultsFor: aListOfResults [
 	^ aListOfResults collect: [:result | result total]
 	

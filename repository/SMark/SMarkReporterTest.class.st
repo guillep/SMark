@@ -1,18 +1,20 @@
 Class {
-	#name : #SMarkReporterTest,
-	#superclass : #TestCase,
+	#name : 'SMarkReporterTest',
+	#superclass : 'TestCase',
 	#instVars : [
 		'runner'
 	],
-	#category : 'SMark-Tests'
+	#category : 'SMark-Tests',
+	#package : 'SMark',
+	#tag : 'Tests'
 }
 
-{ #category : #running }
+{ #category : 'running' }
 SMarkReporterTest >> setUp [
 	runner := SMarkTestRunnerSuiteForAutosizing run.
 ]
 
-{ #category : #'compatibility Pharo 1.4 vs. 2.0' }
+{ #category : 'compatibility Pharo 1.4 vs. 2.0' }
 SMarkReporterTest >> string: str includes: subStr [
 	"To be compatible with Pharo 1.4 and 2.0"
 	(str respondsTo: #includesSubstring:)
@@ -20,7 +22,7 @@ SMarkReporterTest >> string: str includes: subStr [
 		ifFalse: [ ^ str includesSubString: subStr ] "1.4"
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 SMarkReporterTest >> testContentOfStream [
 	"Hm, how to test that robustly?"
 	| reporter stream out |
@@ -33,7 +35,7 @@ SMarkReporterTest >> testContentOfStream [
 	self assert: (self string: out includes: 'Big').
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 SMarkReporterTest >> testConvenienceReportOnRunner [
 	| stream out |
 	stream := TextStream on: String new.

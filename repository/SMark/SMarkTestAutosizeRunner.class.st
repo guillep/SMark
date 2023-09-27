@@ -1,6 +1,6 @@
 Class {
-	#name : #SMarkTestAutosizeRunner,
-	#superclass : #SMarkAutosizeRunner,
+	#name : 'SMarkTestAutosizeRunner',
+	#superclass : 'SMarkAutosizeRunner',
 	#instVars : [
 		'performedBenchmarks',
 		'notifyRunnerWasExecuted',
@@ -10,50 +10,52 @@ Class {
 		'didSetUpBenchB',
 		'baseBenchmarkExecuted'
 	],
-	#category : 'SMark-Tests'
+	#category : 'SMark-Tests',
+	#package : 'SMark',
+	#tag : 'Tests'
 }
 
-{ #category : #'as yet unclassified' }
+{ #category : 'as yet unclassified' }
 SMarkTestAutosizeRunner >> baseBenchmarkExecuted [
 	^ baseBenchmarkExecuted
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : 'as yet unclassified' }
 SMarkTestAutosizeRunner >> countSetUpInvoke [
 	setUpCount := setUpCount + 1
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : 'as yet unclassified' }
 SMarkTestAutosizeRunner >> countTearDownInvoke [
 	tearDownCount := tearDownCount + 1
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : 'as yet unclassified' }
 SMarkTestAutosizeRunner >> countWasExecuted [
 	^ notifyRunnerWasExecuted 
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : 'as yet unclassified' }
 SMarkTestAutosizeRunner >> didPerform: aSymbol [
 	performedBenchmarks add: aSymbol.
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : 'as yet unclassified' }
 SMarkTestAutosizeRunner >> didRunBaseBenchmark [
 	baseBenchmarkExecuted := true.
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : 'as yet unclassified' }
 SMarkTestAutosizeRunner >> didSetUpBenchB [
 	didSetUpBenchB := true.
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : 'as yet unclassified' }
 SMarkTestAutosizeRunner >> didTearDownBenchC [
 	didTearDownBenchC := true.
 ]
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 SMarkTestAutosizeRunner >> initialize [
 	super initialize.
 
@@ -69,22 +71,22 @@ SMarkTestAutosizeRunner >> initialize [
 	targetTime := 50.
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : 'as yet unclassified' }
 SMarkTestAutosizeRunner >> isNotifyRunnerWasExecutedSet [
 	^ notifyRunnerWasExecuted
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : 'as yet unclassified' }
 SMarkTestAutosizeRunner >> notifyRunnerWasExecuted [
 	notifyRunnerWasExecuted := notifyRunnerWasExecuted + 1
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : 'as yet unclassified' }
 SMarkTestAutosizeRunner >> performedBenchmarks [
 	^ performedBenchmarks
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : 'as yet unclassified' }
 SMarkTestAutosizeRunner >> setUp [
 	notifyRunnerWasExecuted := false
 ]

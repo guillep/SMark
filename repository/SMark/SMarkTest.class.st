@@ -2,12 +2,14 @@
 A general test to ensure the overall framework works as expected.
 "
 Class {
-	#name : #SMarkTest,
-	#superclass : #TestCase,
-	#category : 'SMark-Tests'
+	#name : 'SMarkTest',
+	#superclass : 'TestCase',
+	#category : 'SMark-Tests',
+	#package : 'SMark',
+	#tag : 'Tests'
 }
 
-{ #category : #running }
+{ #category : 'running' }
 SMarkTest >> setUp [
 	"Necessary for Squeak 4.2 compatibility, since method anotations are not supported in the base image."
 	(self respondsTo:  #timeout:) ifTrue: [
@@ -15,7 +17,7 @@ SMarkTest >> setUp [
 	].
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 SMarkTest >> testAllBenchmarksForReturningThemSelf [
 	"This is a regression test to ensure that the old behavior worked in the first place"
 	| allSuites |
@@ -34,7 +36,7 @@ SMarkTest >> testAllBenchmarksForReturningThemSelf [
 	].
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 SMarkTest >> testBasicRun [
 	| runner results benchResult result |
 	

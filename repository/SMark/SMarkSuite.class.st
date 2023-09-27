@@ -17,16 +17,17 @@ To get an example print the result of the following expression:
 
 "
 Class {
-	#name : #SMarkSuite,
-	#superclass : #Object,
+	#name : 'SMarkSuite',
+	#superclass : 'Object',
 	#instVars : [
 		'runner',
 		'selectedBenchmarks'
 	],
-	#category : #SMark
+	#category : 'SMark',
+	#package : 'SMark'
 }
 
-{ #category : #benchmarking }
+{ #category : 'benchmarking' }
 SMarkSuite class >> benchmarkForSelector: aSelector [
 
 	"Returns a single benchmark for the corresponding selector"
@@ -37,24 +38,24 @@ SMarkSuite class >> benchmarkForSelector: aSelector [
 		yourself
 ]
 
-{ #category : #benchmarking }
+{ #category : 'benchmarking' }
 SMarkSuite class >> benchmarkParameters [
 
   ^ ParametrizedTestMatrix new
 ]
 
-{ #category : #defaults }
+{ #category : 'defaults' }
 SMarkSuite class >> defaultProblemSize [
 	^ nil
 ]
 
-{ #category : #defaults }
+{ #category : 'defaults' }
 SMarkSuite class >> defaultRunner [
 	^ self onCog: [SMarkCogRunner]
 	       else:  [SMarkRunner]
 ]
 
-{ #category : #benchmarking }
+{ #category : 'benchmarking' }
 SMarkSuite class >> isAbstractClass [
 	"This is a hack that is necessary in Squeak since it does not provide #isAbstractClass.
 	 Actually this class is supposed to be abstract, but well, inheritance..."
@@ -62,50 +63,50 @@ SMarkSuite class >> isAbstractClass [
 	^ false
 ]
 
-{ #category : #'platform support' }
+{ #category : 'platform support' }
 SMarkSuite class >> onCog: cogSpecificBlock else: general [
 	^ (Smalltalk vm isRunningCogit)
 		ifTrue:  [cogSpecificBlock value]
 		ifFalse: [general value]
 ]
 
-{ #category : #profiling }
+{ #category : 'profiling' }
 SMarkSuite class >> profile: aSelector [
 	^ self profileRunner 
 		execute: self new selector: aSelector.
 ]
 
-{ #category : #profiling }
+{ #category : 'profiling' }
 SMarkSuite class >> profile: aSelector iterations: nIterations [
 	^ self profileRunner 
 		execute: self new selector: aSelector iterations: nIterations.
 ]
 
-{ #category : #profiling }
+{ #category : 'profiling' }
 SMarkSuite class >> profileAll [
 	^ self profileRunner 
 		execute: self new.
 ]
 
-{ #category : #profiling }
+{ #category : 'profiling' }
 SMarkSuite class >> profileRunner [
 	^ SMarkProfileRunner
 ]
 
-{ #category : #benchmarking }
+{ #category : 'benchmarking' }
 SMarkSuite class >> run [
 	"Execute the suite one time."
 	^ self defaultRunner execute: self new.
 ]
 
-{ #category : #benchmarking }
+{ #category : 'benchmarking' }
 SMarkSuite class >> run: nIterations [
 	"Execute the suite a given number of iterations."
 	
 	^ self defaultRunner execute: self new with: nIterations.
 ]
 
-{ #category : #benchmarking }
+{ #category : 'benchmarking' }
 SMarkSuite class >> runOnly: aSelector [
   "aSelector should refer to a benchmark method.
    Example:
@@ -114,14 +115,14 @@ SMarkSuite class >> runOnly: aSelector [
   ^ self defaultRunner execute: (self new runOnly: aSelector)
 ]
 
-{ #category : #benchmarking }
+{ #category : 'benchmarking' }
 SMarkSuite class >> runOnly: aSelector iterations: anInteger [
 	"Execute only the bench name aSelector from the suite."
 	
 	^ self defaultRunner execute: (self new runOnly: aSelector) with: anInteger
 ]
 
-{ #category : #helper }
+{ #category : 'helper' }
 SMarkSuite >> benchmarkNameForSelector: selector [
 
 	"Extracts the actual name of the benchmark from the selector"
@@ -137,7 +138,7 @@ SMarkSuite >> benchmarkNameForSelector: selector [
 		^ benchName, stream contents ]
 ]
 
-{ #category : #running }
+{ #category : 'running' }
 SMarkSuite >> cleanUpInstanceVariables [
 	"Make sure all variables that are 'user variables' get cleaned"
 	
@@ -145,30 +146,30 @@ SMarkSuite >> cleanUpInstanceVariables [
 		self instVarNamed: name put: nil ]
 ]
 
-{ #category : #benchmarking }
+{ #category : 'benchmarking' }
 SMarkSuite >> currentBenchmarkParameters [ 
 
 	^ (self class benchmarkParameters selectors collect: [ :selector | (selector -> (self instVarNamed: selector)) ]) asDictionary
 ]
 
-{ #category : #running }
+{ #category : 'running' }
 SMarkSuite >> instanceVariablesToPreserve [
 	^ { #runner. self paramInstanceVariables } flattened
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 SMarkSuite >> paramInstanceVariables [
 
 	^ self class benchmarkParameters selectors.
 ]
 
-{ #category : #running }
+{ #category : 'running' }
 SMarkSuite >> performBenchmarkSelector: aSelector [
 
 	^ self perform: aSelector
 ]
 
-{ #category : #benchmarking }
+{ #category : 'benchmarking' }
 SMarkSuite >> performBenchmarks [
 
 	| potentialBenchmarkSelectors |
@@ -181,7 +182,7 @@ SMarkSuite >> performBenchmarks [
 			runner performBenchmark: selector ] ]
 ]
 
-{ #category : #benchmarking }
+{ #category : 'benchmarking' }
 SMarkSuite >> performCustomSelector: aSelector with: aPrefix [
 	| customSelector |
 	customSelector := (aPrefix, aSelector capitalized) asSymbol.
@@ -189,7 +190,7 @@ SMarkSuite >> performCustomSelector: aSelector with: aPrefix [
 		self perform: customSelector].
 ]
 
-{ #category : #benchmarking }
+{ #category : 'benchmarking' }
 SMarkSuite >> problemSize [
 	<omniUnenforced> "Hint for the OMOP that it is part of the meta infrastructure"
 	runner             ifNil: [^ self class defaultProblemSize].
@@ -197,13 +198,13 @@ SMarkSuite >> problemSize [
 	^ runner problemSize
 ]
 
-{ #category : #benchmarking }
+{ #category : 'benchmarking' }
 SMarkSuite >> processResult: anObject withTimer: aSMarkTimer [
 	"subclass responsability. You can verify your results here, or do things with the timer."
 	^self.
 ]
 
-{ #category : #benchmarking }
+{ #category : 'benchmarking' }
 SMarkSuite >> run [
 	"Executes all the benchmarks in the suite, 
 	 coordinating with the runner when necessary"
@@ -220,7 +221,7 @@ SMarkSuite >> run [
 	].
 ]
 
-{ #category : #benchmarking }
+{ #category : 'benchmarking' }
 SMarkSuite >> runBenchmark: aSelector [
 	
 	[self setUp.
@@ -231,33 +232,33 @@ SMarkSuite >> runBenchmark: aSelector [
 		self cleanUpInstanceVariables]
 ]
 
-{ #category : #benchmarking }
+{ #category : 'benchmarking' }
 SMarkSuite >> runOnly: aSymbol [
 	selectedBenchmarks := IdentitySet newFrom: { aSymbol }.
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 SMarkSuite >> runner [
 	^ runner
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 SMarkSuite >> runner: aRunner [
 	runner := aRunner.
 ]
 
-{ #category : #benchmarking }
+{ #category : 'benchmarking' }
 SMarkSuite >> selectedBenchmarks [
 	^ selectedBenchmarks
 ]
 
-{ #category : #running }
+{ #category : 'running' }
 SMarkSuite >> setUp [
 	"It is the subclass' responsibility to set up the necessary environment for a benchmark"
 	^ self
 ]
 
-{ #category : #testing }
+{ #category : 'testing' }
 SMarkSuite >> shouldRunSelector: selector [
 	"Tells whether the given selector is in the form bench*, and thus is a benchmark that should be executed."
 	
@@ -265,7 +266,7 @@ SMarkSuite >> shouldRunSelector: selector [
 	^ selector beginsWith: #bench
 ]
 
-{ #category : #running }
+{ #category : 'running' }
 SMarkSuite >> tearDown [
 	"It is the subclass' responsibility to clean up the environment after a benchmark"
 	^ self
