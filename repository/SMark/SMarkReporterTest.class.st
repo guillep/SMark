@@ -1,18 +1,28 @@
 Class {
-	#name : #SMarkReporterTest,
-	#superclass : #TestCase,
+	#name : 'SMarkReporterTest',
+	#superclass : 'TestCase',
 	#instVars : [
 		'runner'
 	],
-	#category : 'SMark-Tests'
+	#category : 'SMark-Tests',
+	#package : 'SMark',
+	#tag : 'Tests'
 }
 
-{ #category : #running }
+{ #category : 'tests' }
+SMarkReporterTest >> outputFile [
+
+	^ 'report.txt' asFileReference
+]
+
+{ #category : 'running' }
 SMarkReporterTest >> setUp [
+
+	super setUp.
 	runner := SMarkTestRunnerSuiteForAutosizing run.
 ]
 
-{ #category : #'compatibility Pharo 1.4 vs. 2.0' }
+{ #category : 'compatibility Pharo 1.4 vs. 2.0' }
 SMarkReporterTest >> string: str includes: subStr [
 	"To be compatible with Pharo 1.4 and 2.0"
 	(str respondsTo: #includesSubstring:)
@@ -20,7 +30,14 @@ SMarkReporterTest >> string: str includes: subStr [
 		ifFalse: [ ^ str includesSubString: subStr ] "1.4"
 ]
 
-{ #category : #tests }
+{ #category : 'running' }
+SMarkReporterTest >> tearDown [ 
+
+	self outputFile ensureDelete.
+	super tearDown.
+]
+
+{ #category : 'tests' }
 SMarkReporterTest >> testContentOfStream [
 	"Hm, how to test that robustly?"
 	| reporter stream out |
@@ -33,7 +50,7 @@ SMarkReporterTest >> testContentOfStream [
 	self assert: (self string: out includes: 'Big').
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 SMarkReporterTest >> testConvenienceReportOnRunner [
 	| stream out |
 	stream := TextStream on: String new.
@@ -48,4 +65,19 @@ SMarkReporterTest >> testConvenienceReportOnRunner [
 	
 	self assert: (self string: out includes: 'Small').
 	self assert: (self string: out includes: 'Big').
+]
+
+{ #category : 'tests' }
+SMarkReporterTest >> testReportOnFileWriteContents [
+	| stream outputContents |
+
+	stream := self outputFile writeStream.
+	runner := SMarkTestAutosizeRunner execute: SMarkTestRunnerSuiteForAutosizing new.
+	"Check whether it reported as expected"
+	SMarkReporter reportFor: runner on: stream.
+	
+	outputContents := self outputFile readStream contents.
+
+	self assert: (self string: outputContents includes: 'Small').
+	self assert: (self string: outputContents includes: 'Big').
 ]

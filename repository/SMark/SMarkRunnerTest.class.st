@@ -1,15 +1,17 @@
 Class {
-	#name : #SMarkRunnerTest,
-	#superclass : #TestCase,
-	#category : 'SMark-Tests'
+	#name : 'SMarkRunnerTest',
+	#superclass : 'TestCase',
+	#category : 'SMark-Tests',
+	#package : 'SMark',
+	#tag : 'Tests'
 }
 
-{ #category : #helper }
+{ #category : 'helper' }
 SMarkRunnerTest >> runnerClass [
 	^ SMarkTestRunner
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 SMarkRunnerTest >> testBaseBenchmark [
 	"Ensure the base benchmark is executed when available"
 	
@@ -19,7 +21,7 @@ SMarkRunnerTest >> testBaseBenchmark [
 	self assert: runner baseBenchmarkExecuted  
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 SMarkRunnerTest >> testBaseBenchmarkNone [
 	"Ensure that not having a base benchmark does not pose a problem"
 
@@ -29,7 +31,7 @@ SMarkRunnerTest >> testBaseBenchmarkNone [
 	self deny: runner baseBenchmarkExecuted  
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 SMarkRunnerTest >> testBenchmarkWithMultipleCriteraTimers [
 	"Check whether the benchmark benchWithMultipleCriteria, really results in different unrelated timings"
 	| runner result |
@@ -50,7 +52,7 @@ SMarkRunnerTest >> testBenchmarkWithMultipleCriteraTimers [
 	
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 SMarkRunnerTest >> testClassExecute [
 	| runner |
 	runner := self runnerClass execute: SMarkTestSuiteWithBaseBenchmark new.
@@ -58,7 +60,7 @@ SMarkRunnerTest >> testClassExecute [
 	self assert: (runner isKindOf: self runnerClass).
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 SMarkRunnerTest >> testExecute [
 	"Ensure all benchmarks are run, including the baseBenchmark and the results are returned"
 	| runner results performedBenchmarks |
@@ -75,7 +77,7 @@ SMarkRunnerTest >> testExecute [
 	self assert: (((results at: #baseBenchmark) at: 1) isKindOf: SMarkResult).
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 SMarkRunnerTest >> testIterations [
 	| runner |
 	" simple scenario should default to 1 run for now "
@@ -98,7 +100,7 @@ SMarkRunnerTest >> testIterations [
 	self assert: 10 equals: runner countWasExecuted.
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 SMarkRunnerTest >> testPerformBenchmark [
 	"Ensure that performBenchmark executes all the defined #bench methods, but for instance not #Bench"
 	
@@ -114,7 +116,7 @@ SMarkRunnerTest >> testPerformBenchmark [
 	self deny: (performedBenchmarks includes: #BenchShouldNotBeExecuted).
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 SMarkRunnerTest >> testResultStructure [
 	| runner results resultA resultB suite |
 	suite := SMarkTestSuite new.
@@ -145,7 +147,7 @@ SMarkRunnerTest >> testResultStructure [
 	"Testing for multi-criteria results somewhere else"
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 SMarkRunnerTest >> testTimer [
 	"Simple test whether a timer is created and it is from the expected class.
 	 This test is very basic, other tests like testBenchmarkWithMultipleCirteria* need to cover the rest"

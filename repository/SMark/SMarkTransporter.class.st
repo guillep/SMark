@@ -6,12 +6,13 @@ Thus, it is just a dummy class for future use, and to hold #transportersForFileO
 
 "
 Class {
-	#name : #SMarkTransporter,
-	#superclass : #Object,
-	#category : 'SMark'
+	#name : 'SMarkTransporter',
+	#superclass : 'Object',
+	#category : 'SMark',
+	#package : 'SMark'
 }
 
-{ #category : #transporter }
+{ #category : 'transporter' }
 SMarkTransporter class >> transportersForFileOutMenu [
 	^ { (Smalltalk at: #Transporter ifAbsent: [^#()])
 			forPackage: (PackageInfo named: 'SMark') }

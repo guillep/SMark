@@ -1,10 +1,12 @@
 Class {
-	#name : #SMarkHarnessClassTest,
-	#superclass : #TestCase,
-	#category : 'SMark-Tests'
+	#name : 'SMarkHarnessClassTest',
+	#superclass : 'TestCase',
+	#category : 'SMark-Tests',
+	#package : 'SMark',
+	#tag : 'Tests'
 }
 
-{ #category : #tests }
+{ #category : 'tests' }
 SMarkHarnessClassTest >> testShouldShowUsage [
 	| example1 example2 example3 example4 |
 	example1 := { #ignored. '--help' }.

@@ -1,6 +1,6 @@
 Class {
-	#name : #SMarkHarnessArgumentParser,
-	#superclass : #Object,
+	#name : 'SMarkHarnessArgumentParser',
+	#superclass : 'Object',
 	#instVars : [
 		'runner',
 		'reporter',
@@ -18,10 +18,11 @@ Class {
 		'suiteClass',
 		'harness'
 	],
-	#category : #SMark
+	#category : 'SMark',
+	#package : 'SMark'
 }
 
-{ #category : #'argument parsing' }
+{ #category : 'argument parsing' }
 SMarkHarnessArgumentParser >> determineBenchmarkParameters [
 	"Initialize with defaults, will be overwritten in case
 	 it is specified."
@@ -32,7 +33,7 @@ SMarkHarnessArgumentParser >> determineBenchmarkParameters [
 	self determineBenchmarkParametersFromArguments.
 ]
 
-{ #category : #'argument parsing' }
+{ #category : 'argument parsing' }
 SMarkHarnessArgumentParser >> determineBenchmarkParametersFromArguments [
 	i := i + 1.
 	i <= numParams ifTrue: [
@@ -48,7 +49,7 @@ SMarkHarnessArgumentParser >> determineBenchmarkParametersFromArguments [
 	].
 ]
 
-{ #category : #'argument parsing' }
+{ #category : 'argument parsing' }
 SMarkHarnessArgumentParser >> determineReporter [
 	(currentObj isKindOf: SMarkReporter)
 		ifFalse: [ reporter := harness defaultReporter new. ]
@@ -60,7 +61,7 @@ SMarkHarnessArgumentParser >> determineReporter [
 		].
 ]
 
-{ #category : #'argument parsing' }
+{ #category : 'argument parsing' }
 SMarkHarnessArgumentParser >> determineRunner [
 	(currentObj isKindOf: SMarkRunner)
 		ifFalse: [ runner := harness defaultRunner new. ]
@@ -73,17 +74,17 @@ SMarkHarnessArgumentParser >> determineRunner [
 		].
 ]
 
-{ #category : #'argument parsing' }
+{ #category : 'argument parsing' }
 SMarkHarnessArgumentParser >> determineSuiteOrBenchmark [
 	self parseBenchmarkOrSuite: current.
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 SMarkHarnessArgumentParser >> harness: aHarness [
 	harness := aHarness
 ]
 
-{ #category : #helper }
+{ #category : 'helper' }
 SMarkHarnessArgumentParser >> instructRunner [
 	suite := suiteClass new.
 	specificBenchmark ifNotNil: [
@@ -96,7 +97,7 @@ SMarkHarnessArgumentParser >> instructRunner [
 	runner problemSize: problemSize.
 ]
 
-{ #category : #parsing }
+{ #category : 'parsing' }
 SMarkHarnessArgumentParser >> parse: argumentsArray [
 	arguments := argumentsArray.
 	numParams := arguments size.
@@ -117,7 +118,7 @@ SMarkHarnessArgumentParser >> parse: argumentsArray [
 	^ {runner. reporter}
 ]
 
-{ #category : #'argument parsing' }
+{ #category : 'argument parsing' }
 SMarkHarnessArgumentParser >> parseBenchmarkOrSuite: aBenchmarkOrSuite [
 	"Identify the benchmark suite or suite and benchmark method
 	 that should be executed. The string should be of the format 'Class>>benchName' or 'Class.benchName' for shell/bash compatibility.

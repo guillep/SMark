@@ -11,33 +11,34 @@ Example:
 	f contents
 "
 Class {
-	#name : #SMarkReporter,
-	#superclass : #Object,
+	#name : 'SMarkReporter',
+	#superclass : 'Object',
 	#instVars : [
 		'runner',
 		'stream'
 	],
-	#category : 'SMark'
+	#category : 'SMark',
+	#package : 'SMark'
 }
 
-{ #category : #defaults }
+{ #category : 'defaults' }
 SMarkReporter class >> defaultOutputDestination [
 	^ ScriptConsole
 ]
 
-{ #category : #defaults }
+{ #category : 'defaults' }
 SMarkReporter class >> defaultReporter [
 	^ SMarkSimpleStatisticsReporter
 ]
 
-{ #category : #reporting }
+{ #category : 'reporting' }
 SMarkReporter class >> reportFor: aRunner [
 	^ self
 		reportFor: aRunner
 		on: self defaultOutputDestination.
 ]
 
-{ #category : #reporting }
+{ #category : 'reporting' }
 SMarkReporter class >> reportFor: aRunner on: aStream [
 	| reporter |
 	reporter := self new
@@ -47,41 +48,41 @@ SMarkReporter class >> reportFor: aRunner on: aStream [
 	^ reporter.
 ]
 
-{ #category : #reporting }
+{ #category : 'reporting' }
 SMarkReporter >> benchmarkFooter: aName [
-	stream cr.
+	stream cr; flush.
 ]
 
-{ #category : #reporting }
+{ #category : 'reporting' }
 SMarkReporter >> benchmarkHeader: aName [
 	stream << 'Benchmark ' << (aName asString); cr.
 ]
 
-{ #category : #reporting }
+{ #category : 'reporting' }
 SMarkReporter >> footer [
 	"No output at the moment"
 	^ self
 ]
 
-{ #category : #reporting }
+{ #category : 'reporting' }
 SMarkReporter >> header [
 	| suiteName |
 	suiteName := runner suite class name asString.
 	stream << 'Report for: ' << suiteName; cr.
 ]
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 SMarkReporter >> initialize [
 	super initialize.
 	stream := self class defaultOutputDestination.
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 SMarkReporter >> outputStream: aStream [
 	stream := aStream  
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 SMarkReporter >> report [
 	self header.
 	
@@ -95,14 +96,14 @@ SMarkReporter >> report [
 	^ self
 ]
 
-{ #category : #reporting }
+{ #category : 'reporting' }
 SMarkReporter >> reportAllRuns: aListOfResults of: benchmark [
 	aListOfResults do: [:result |
 		result criteria keysAndValuesDo: [:benchName :timer |
 			stream << benchName << ': ' << (timer totalTime asString, 'ms'); cr.]]
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 SMarkReporter >> runner: aRunner [
 	runner := aRunner.
 ]

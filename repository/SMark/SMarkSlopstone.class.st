@@ -35,16 +35,18 @@ Bruce Samuelson
 
 "
 Class {
-	#name : #SMarkSlopstone,
-	#superclass : #SMarkSuite,
+	#name : 'SMarkSlopstone',
+	#superclass : 'SMarkSuite',
 	#instVars : [
 		'obj',
 		'o'
 	],
-	#category : #'SMark-Classic'
+	#category : 'SMark-Classic',
+	#package : 'SMark',
+	#tag : 'Classic'
 }
 
-{ #category : #benchmarking }
+{ #category : 'benchmarking' }
 SMarkSlopstone >> benchStone [
 	"Using the SlopStone benchmarks, but not doing the
 	 old style Stone performance number reporting"
@@ -66,12 +68,12 @@ SMarkSlopstone >> benchStone [
 
 ]
 
-{ #category : #defaults }
+{ #category : 'defaults' }
 SMarkSlopstone >> defaultProblemSize [
 	^ 1
 ]
 
-{ #category : #'stone benchmarks' }
+{ #category : 'stone benchmarks' }
 SMarkSlopstone >> doBlockValue [
 	[] value. [] value. [] value. [] value. [] value. [] value. [] value.
 	[] value. [] value. [] value. [] value. [] value. [] value. [] value.
@@ -83,13 +85,13 @@ SMarkSlopstone >> doBlockValue [
 	[] value. [] value. [] value. [] value. [] value. [] value. [] value
 ]
 
-{ #category : #'stone benchmarks' }
+{ #category : 'stone benchmarks' }
 SMarkSlopstone >> doFloatAdd [
 	1.0+1.0+1.0+1.0+1.0+1.0+1.0+1.0+1.0+1.0+1.0+1.0+1.0+1.0+1.0+1.0+1.0+
 	1.0+1.0+1.0+1.0+1.0+1.0+1.0+1.0+1.0+1.0+1.0+1.0+1.0+1.0+1.0+1.0+1.0
 ]
 
-{ #category : #'stone benchmarks' }
+{ #category : 'stone benchmarks' }
 SMarkSlopstone >> doIntAdd [
 	1+1+1+1+1+1+1+1+1+1+1+1+1+1+1+1+1+1+1+1+1+1+1+1+1+1+1+1+1+1+1+1+1+1+
 	1+1+1+1+1+1+1+1+1+1+1+1+1+1+1+1+1+1+1+1+1+1+1+1+1+1+1+1+1+1+1+1+1+1+
@@ -100,12 +102,12 @@ SMarkSlopstone >> doIntAdd [
 	1+1+1+1+1+1+1+1+1+1+1+1+1+1+1+1+1+1+1+1+1+1+1+1+1+1+1+1+1+1+1+1+1+1
 ]
 
-{ #category : #'stone benchmarks' }
+{ #category : 'stone benchmarks' }
 SMarkSlopstone >> doObjectCopy [
 	o copy copy copy copy copy copy copy copy copy copy
 ]
 
-{ #category : #'stone benchmarks' }
+{ #category : 'stone benchmarks' }
 SMarkSlopstone >> doObjectCreation [
 	obj new. obj new. obj new. obj new. obj new.
 	obj new. obj new. obj new. obj new. obj new.
@@ -113,7 +115,7 @@ SMarkSlopstone >> doObjectCreation [
 	obj new. obj new. obj new. obj new. obj new
 ]
 
-{ #category : #'stone benchmarks' }
+{ #category : 'stone benchmarks' }
 SMarkSlopstone >> doPerform [
 	o perform: #yourself. o perform: #yourself. o perform: #yourself.
 	o perform: #yourself. o perform: #yourself. o perform: #yourself.
@@ -127,7 +129,7 @@ SMarkSlopstone >> doPerform [
 	o perform: #yourself. o perform: #yourself. o perform: #yourself
 ]
 
-{ #category : #'stone benchmarks' }
+{ #category : 'stone benchmarks' }
 SMarkSlopstone >> doStringAccess [
 	'a' at: 1. 'a' at: 1. 'a' at: 1. 'a' at: 1. 'a' at: 1. 'a' at: 1.
 	'a' at: 1. 'a' at: 1. 'a' at: 1. 'a' at: 1. 'a' at: 1. 'a' at: 1.
@@ -141,7 +143,7 @@ SMarkSlopstone >> doStringAccess [
 	'a' at: 1. 'a' at: 1. 'a' at: 1. 'a' at: 1. 'a' at: 1. 'a' at: 1
 ]
 
-{ #category : #benchmarking }
+{ #category : 'benchmarking' }
 SMarkSlopstone >> problemSize [
 	<omniUnenforced> "Hint for the OMOP that it is part of the meta infrastructure"
 	| ps |
@@ -152,7 +154,7 @@ SMarkSlopstone >> problemSize [
 	^ ps
 ]
 
-{ #category : #benchmarking }
+{ #category : 'benchmarking' }
 SMarkSlopstone >> readme [
    "STEFAN: use the original benchmarks, but do not use original way
             of reporting results. Rely on the SMark reporting instead."
@@ -230,7 +232,7 @@ SMarkSlopstone >> readme [
 	^ self
 ]
 
-{ #category : #'initialize-release' }
+{ #category : 'initialize-release' }
 SMarkSlopstone >> setUp [
 	obj := Object.
 ]

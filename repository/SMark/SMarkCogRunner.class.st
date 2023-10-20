@@ -3,21 +3,22 @@ This runner is doing warmup on for Cog VMs with just-in-time compilation.
 The goal is to bring the JIT compiler into a steady state where no jitting is performed anymore during benchmarking.
 "
 Class {
-	#name : #SMarkCogRunner,
-	#superclass : #SMarkRunner,
+	#name : 'SMarkCogRunner',
+	#superclass : 'SMarkRunner',
 	#instVars : [
 		'warmingUp'
 	],
-	#category : 'SMark'
+	#category : 'SMark',
+	#package : 'SMark'
 }
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 SMarkCogRunner >> initialize [
 	super initialize.
 	warmingUp := false.
 ]
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 SMarkCogRunner >> performBenchmark: aSelector [
 	"Based on an email by Eliot from May 16th, 2011.
 	 The first time a method is executed it will get into the inline cache.
@@ -33,7 +34,7 @@ SMarkCogRunner >> performBenchmark: aSelector [
 	^ super performBenchmark: aSelector.
 ]
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 SMarkCogRunner >> recordResults: timer for: aSelector [
 	"Only record the results when we are not in warmup mode."
 	warmingUp ifFalse: [

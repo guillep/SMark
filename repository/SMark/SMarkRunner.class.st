@@ -1,6 +1,6 @@
 Class {
-	#name : #SMarkRunner,
-	#superclass : #Object,
+	#name : 'SMarkRunner',
+	#superclass : 'Object',
 	#instVars : [
 		'numIterations',
 		'suite',
@@ -11,30 +11,31 @@ Class {
 		'problemSize',
 		'numProcesses'
 	],
-	#category : #SMark
+	#category : 'SMark',
+	#package : 'SMark'
 }
 
-{ #category : #defaults }
+{ #category : 'defaults' }
 SMarkRunner class >> defaultNumberOfIterations [
 	^ 1
 ]
 
-{ #category : #defaults }
+{ #category : 'defaults' }
 SMarkRunner class >> defaultNumberOfProcesses [
 	^ 1
 ]
 
-{ #category : #defaults }
+{ #category : 'defaults' }
 SMarkRunner class >> defaultTimer [
 	^ SMarkTimer
 ]
 
-{ #category : #benchmarking }
+{ #category : 'benchmarking' }
 SMarkRunner class >> execute: aSuite [
 	^ self execute: aSuite with: 1.
 ]
 
-{ #category : #benchmarking }
+{ #category : 'benchmarking' }
 SMarkRunner class >> execute: aSuite problemSize: problemSize [
 	| runner |
 	runner := self new.
@@ -45,7 +46,7 @@ SMarkRunner class >> execute: aSuite problemSize: problemSize [
 	^ runner
 ]
 
-{ #category : #benchmarking }
+{ #category : 'benchmarking' }
 SMarkRunner class >> execute: aSuite with: nIterations [
 	| runner |
 	runner := self new.
@@ -56,7 +57,7 @@ SMarkRunner class >> execute: aSuite with: nIterations [
 	^ runner
 ]
 
-{ #category : #helper }
+{ #category : 'helper' }
 SMarkRunner >> createTimer: name [
 	"Create and register a new timer for the current benchmark"
 	| timer |
@@ -69,7 +70,7 @@ SMarkRunner >> createTimer: name [
 	^ timer.
 ]
 
-{ #category : #execution }
+{ #category : 'execution' }
 SMarkRunner >> execute [
 	
 	self runSuite.
@@ -78,7 +79,7 @@ SMarkRunner >> execute [
 	
 ]
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 SMarkRunner >> initialize [
 	super initialize.
 	numIterations := self class defaultNumberOfIterations.
@@ -86,23 +87,23 @@ SMarkRunner >> initialize [
 	results := Dictionary new.
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 SMarkRunner >> iterations [
 	^ numIterations
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 SMarkRunner >> iterations: anInteger [
 	numIterations := anInteger
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 SMarkRunner >> numberOfIterations [
 
 	^ numIterations ifNil: [ self class defaultNumberOfIterations ]
 ]
 
-{ #category : #benchmarking }
+{ #category : 'benchmarking' }
 SMarkRunner >> performBenchmark: aSelector [
 	currentBenchmark := aSelector.
 	
@@ -116,7 +117,7 @@ SMarkRunner >> performBenchmark: aSelector [
 	^ results at: (suite benchmarkNameForSelector: aSelector)
 ]
 
-{ #category : #benchmarking }
+{ #category : 'benchmarking' }
 SMarkRunner >> postBenchmark [
 
 	"Hook for subclasses.
@@ -125,25 +126,25 @@ SMarkRunner >> postBenchmark [
 	currentBenchmark := nil.
 ]
 
-{ #category : #benchmarking }
+{ #category : 'benchmarking' }
 SMarkRunner >> preBenchmark [
 
 	"Hook for subclasses.
 	Executed before all iterations"
 ]
 
-{ #category : #printing }
+{ #category : 'printing' }
 SMarkRunner >> printOn: aStream [
 	^ self reportOn: aStream.
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 SMarkRunner >> problemSize [
 	<omniUnenforced> "Hint for the OMOP that it is part of the meta infrastructure"
 	^ problemSize
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 SMarkRunner >> problemSize: aValue [
 	"Do some conversion to make it easier for the benchmarks"
 	(aValue isString and: [aValue isAllDigits]) ifTrue: [
@@ -154,19 +155,19 @@ SMarkRunner >> problemSize: aValue [
 	problemSize := aValue
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 SMarkRunner >> processes [
 	"The standard runner does use only a single process, but in case a benchmark supports parallelism it can query for the intended degree of parallelism"
 	^ numProcesses
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 SMarkRunner >> processes: anInt [
 	"The standard runner does use only a single process, but a benchmark can use that to do its own parallelism"
 	numProcesses := anInt
 ]
 
-{ #category : #helper }
+{ #category : 'helper' }
 SMarkRunner >> recordResults: timer for: aSelector [
 	| result name |
 	name := suite benchmarkNameForSelector: aSelector.
@@ -180,13 +181,13 @@ SMarkRunner >> recordResults: timer for: aSelector [
 	(results at: name ifAbsentPut: [OrderedCollection new]) add: result.
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 SMarkRunner >> report [
 	SMarkReporter defaultReporter reportFor: self.  
 	
 ]
 
-{ #category : #reporting }
+{ #category : 'reporting' }
 SMarkRunner >> reportConfiguration: aStream [
 	aStream << 'Runner Configuration:';cr.
 	aStream << ('  iterations: ', numIterations asString); cr.
@@ -195,18 +196,18 @@ SMarkRunner >> reportConfiguration: aStream [
 
 ]
 
-{ #category : #reporting }
+{ #category : 'reporting' }
 SMarkRunner >> reportOn: aStream [
 	SMarkReporter defaultReporter reportFor: self on: aStream  
 	
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 SMarkRunner >> results [
 	^ results
 ]
 
-{ #category : #benchmarking }
+{ #category : 'benchmarking' }
 SMarkRunner >> runBaseBenchmark [
 	"In certain sitatuations it is one wants a baseline that is incooprated in all 
 	 benchmark results to be substracted from the final values.
@@ -219,7 +220,7 @@ SMarkRunner >> runBaseBenchmark [
 	^ self performBenchmark: #baseBenchmark.
 ]
 
-{ #category : #execution }
+{ #category : 'execution' }
 SMarkRunner >> runSuite [
 
 	"Hook for subclasses, private API, do not call directly."
@@ -227,18 +228,18 @@ SMarkRunner >> runSuite [
 
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 SMarkRunner >> suite [
 	^ suite
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 SMarkRunner >> suite: aBenchmarkSuite [
 	suite := aBenchmarkSuite.
 	suite runner: self.
 ]
 
-{ #category : #benchmarking }
+{ #category : 'benchmarking' }
 SMarkRunner >> timedBenchmarkExecution: aSelector [
 	"Will do a timed execution of the benchmark and return the result timer"
 	| timer result |

@@ -1,14 +1,16 @@
 Class {
-	#name : #SMarkSuiteTest,
-	#superclass : #TestCase,
+	#name : 'SMarkSuiteTest',
+	#superclass : 'TestCase',
 	#instVars : [
 		'didSetUpBenchB',
 		'didTearDownBenchC'
 	],
-	#category : 'SMark-Tests'
+	#category : 'SMark-Tests',
+	#package : 'SMark',
+	#tag : 'Tests'
 }
 
-{ #category : #tests }
+{ #category : 'tests' }
 SMarkSuiteTest >> testBenchmarkNameForSelector [
 	| suite |
 	suite := SMarkSuite new.
@@ -20,7 +22,7 @@ SMarkSuiteTest >> testBenchmarkNameForSelector [
 	self assert: (suite benchmarkNameForSelector: #BenchSomeThing) equals: #BenchSomeThing.
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 SMarkSuiteTest >> testClassRun [
 	| runner |
 	
@@ -29,7 +31,7 @@ SMarkSuiteTest >> testClassRun [
 	self deny: runner results isNil    
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 SMarkSuiteTest >> testCleanUpInstanceVariables [
 	| suite |
 	suite := SMarkTestSuite new.
@@ -49,7 +51,7 @@ SMarkSuiteTest >> testCleanUpInstanceVariables [
 
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 SMarkSuiteTest >> testCustomSetUp [
 	| suite runner |
 	
@@ -59,7 +61,7 @@ SMarkSuiteTest >> testCustomSetUp [
 	self assert: runner hasSetUpBenchB
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 SMarkSuiteTest >> testCustomTearDown [
 	| suite runner |
 	suite := SMarkTestSuite new.
@@ -68,7 +70,7 @@ SMarkSuiteTest >> testCustomTearDown [
 	self assert: runner hasTearDownBenchC.
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 SMarkSuiteTest >> testSetUp [
 	| suite runner |
 	suite := SMarkTestSuite new.
@@ -91,7 +93,7 @@ SMarkSuiteTest >> testSetUp [
 	self assert: 4 equals: runner setUpCount.
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 SMarkSuiteTest >> testSetupAndTeaddownCalledForEveryBenchForEveryIteration [
 	| suite runner |
 
@@ -118,7 +120,7 @@ SMarkSuiteTest >> testSetupAndTeaddownCalledForEveryBenchForEveryIteration [
 	self assert: (4 * 10) equals: runner tearDownCount.
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 SMarkSuiteTest >> testShouldRunSelector [
 	| suite |
 	suite := SMarkSuite new.
@@ -130,7 +132,7 @@ SMarkSuiteTest >> testShouldRunSelector [
 	self deny: (suite shouldRunSelector: #BenchSomeThing).
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 SMarkSuiteTest >> testTearDown [
 	| suite runner |
 	suite := SMarkTestSuite new.

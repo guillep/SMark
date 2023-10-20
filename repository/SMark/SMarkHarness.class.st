@@ -11,33 +11,34 @@ A typical call of the harness from the commandline would result in the following
 	SMarkHarness run: {'SMarkHarness'. 'SMarkLoops.benchIntLoop'. 1. 1. 5}
 "
 Class {
-	#name : #SMarkHarness,
-	#superclass : #Object,
-	#category : 'SMark'
+	#name : 'SMarkHarness',
+	#superclass : 'Object',
+	#category : 'SMark',
+	#package : 'SMark'
 }
 
-{ #category : #helper }
+{ #category : 'helper' }
 SMarkHarness class >> defaultArgumentParser [
 	^ SMarkHarnessArgumentParser
 ]
 
-{ #category : #defaults }
+{ #category : 'defaults' }
 SMarkHarness class >> defaultOutputDestination [
 	^ Smalltalk at:       #ScriptConsole
 	            ifAbsent: [SMarkReporter defaultOutputDestination]
 ]
 
-{ #category : #defaults }
+{ #category : 'defaults' }
 SMarkHarness class >> defaultReporter [
 	^ SMarkReporter defaultReporter
 ]
 
-{ #category : #defaults }
+{ #category : 'defaults' }
 SMarkHarness class >> defaultRunner [
 	^ SMarkSuite defaultRunner
 ]
 
-{ #category : #benchmarking }
+{ #category : 'benchmarking' }
 SMarkHarness class >> execute: runner andReport: reporter [
 	runner reportConfiguration: self defaultOutputDestination.
 	runner execute.
@@ -46,7 +47,7 @@ SMarkHarness class >> execute: runner andReport: reporter [
 	reporter report.
 ]
 
-{ #category : #benchmarking }
+{ #category : 'benchmarking' }
 SMarkHarness class >> execute: aBenchmarkOrSuite using: aRunnerClass andReport: withAReporterClass [
 	| parsedBenchmarkOrSuite runner reporter |
 	
@@ -58,7 +59,7 @@ SMarkHarness class >> execute: aBenchmarkOrSuite using: aRunnerClass andReport: 
 	self execute: runner andReport: reporter.   
 ]
 
-{ #category : #helper }
+{ #category : 'helper' }
 SMarkHarness class >> parseArguments: arguments [
 	| parser |
 	parser := self defaultArgumentParser new.
@@ -66,7 +67,7 @@ SMarkHarness class >> parseArguments: arguments [
 	^ parser parse: arguments.
 ]
 
-{ #category : #'script entry' }
+{ #category : 'script entry' }
 SMarkHarness class >> run: arguments [
 	"Executed from the command line using something similar to
 	 ./vm my.image SMarkHarness SMarkRunner SMarkReporter SMarkLoops\>\>benchIntLoop 1 1 5
@@ -87,7 +88,7 @@ SMarkHarness class >> run: arguments [
 	self execute: runner andReport: reporter. 
 ]
 
-{ #category : #helper }
+{ #category : 'helper' }
 SMarkHarness class >> shouldShowUsage: arguments [
 	
 	arguments size < 2 ifTrue: [^ true ].
@@ -95,7 +96,7 @@ SMarkHarness class >> shouldShowUsage: arguments [
 	^ arguments anySatisfy: [:elem | (elem = '--help') or: [elem = '-?'] ].  
 ]
 
-{ #category : #helper }
+{ #category : 'helper' }
 SMarkHarness class >> usage [
 	| usage |
 	"Example usage: SMarkHarness SMarkRunner SMarkReporter SMarkLoops.benchIntLoop 1 1 5"
@@ -112,7 +113,7 @@ SMarkHarness class >> usage [
 	self defaultOutputDestination print: usage.
 ]
 
-{ #category : #helper }
+{ #category : 'helper' }
 SMarkHarness class >> usageBenchmarkParameters: usage [
 	^ usage,	' iterations         optional, number of times the benchmarks are repeated', String crlf,
 				' processes          optional, number of processes/threads used by the benchmarks', String crlf,
@@ -121,7 +122,7 @@ SMarkHarness class >> usageBenchmarkParameters: usage [
 
 ]
 
-{ #category : #helper }
+{ #category : 'helper' }
 SMarkHarness class >> usageHeader [
 	| usage |
 	usage := 'SMark Benchmark Framework, version: ', self version, String crlf.
@@ -132,19 +133,19 @@ SMarkHarness class >> usageHeader [
 	^ usage
 ]
 
-{ #category : #helper }
+{ #category : 'helper' }
 SMarkHarness class >> usageReporter: usage [
 	^ usage,	' reporter           optional, a SMarkReporter class that processes', String crlf,
 				'                              and displays the results', String crlf.
 	
 ]
 
-{ #category : #helper }
+{ #category : 'helper' }
 SMarkHarness class >> usageRunner: usage [
 	^ usage, ' runner             optional, a SMarkRunner class that executes the benchmarks', String crlf.
 ]
 
-{ #category : #helper }
+{ #category : 'helper' }
 SMarkHarness class >> version [
 	(Smalltalk classNamed: #ConfigurationOfBenchmarking)
 		ifNotNil: [:cfg |

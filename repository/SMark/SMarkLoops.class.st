@@ -5,23 +5,25 @@ Example use:
   (SMarkLoops new runOnly: #benchFloatLoop) run: 10 
 "
 Class {
-	#name : #SMarkLoops,
-	#superclass : #SMarkSuite,
+	#name : 'SMarkLoops',
+	#superclass : 'SMarkSuite',
 	#instVars : [
 		'someInstVar'
 	],
 	#classVars : [
 		'ClassVarValue'
 	],
-	#category : 'SMark-Classic'
+	#category : 'SMark-Classic',
+	#package : 'SMark',
+	#tag : 'Classic'
 }
 
-{ #category : #'as yet unclassified' }
+{ #category : 'as yet unclassified' }
 SMarkLoops class >> defaultProblemSize [
 	^ 50000
 ]
 
-{ #category : #benchmarking }
+{ #category : 'benchmarking' }
 SMarkLoops >> benchArrayAccess [
 	| i obj array |
 	
@@ -37,7 +39,7 @@ SMarkLoops >> benchArrayAccess [
 	].
 ]
 
-{ #category : #benchmarking }
+{ #category : 'benchmarking' }
 SMarkLoops >> benchClassVarBinding [
 	| i r |
 	i := self problemSize.
@@ -49,7 +51,7 @@ SMarkLoops >> benchClassVarBinding [
 	].
 ]
 
-{ #category : #benchmarking }
+{ #category : 'benchmarking' }
 SMarkLoops >> benchFloatLoop [
 	| a limit |
 	a := 1.23.
@@ -60,7 +62,7 @@ SMarkLoops >> benchFloatLoop [
 	].
 ]
 
-{ #category : #benchmarking }
+{ #category : 'benchmarking' }
 SMarkLoops >> benchInstVarAccess [
 	| i r |
 	i := self problemSize.
@@ -72,7 +74,7 @@ SMarkLoops >> benchInstVarAccess [
 	].
 ]
 
-{ #category : #benchmarking }
+{ #category : 'benchmarking' }
 SMarkLoops >> benchIntLoop [
 	| i |
 	i := self problemSize.
@@ -81,7 +83,7 @@ SMarkLoops >> benchIntLoop [
 	].
 ]
 
-{ #category : #benchmarking }
+{ #category : 'benchmarking' }
 SMarkLoops >> benchSend [
 	| i r |
 	i := self problemSize.
@@ -91,7 +93,7 @@ SMarkLoops >> benchSend [
 	].
 ]
 
-{ #category : #benchmarking }
+{ #category : 'benchmarking' }
 SMarkLoops >> benchSendWithManyArguments [
 	| i r |
 	i := self problemSize.
@@ -101,10 +103,10 @@ SMarkLoops >> benchSendWithManyArguments [
 	].
 ]
 
-{ #category : #helper }
+{ #category : 'helper' }
 SMarkLoops >> doNothing [
 ]
 
-{ #category : #helper }
+{ #category : 'helper' }
 SMarkLoops >> doNothingA: p1 b: p2 c: p3 d: p4 e: p5 f: p6 g: p7 h: p8 i: p9 j: p10 [
 ]

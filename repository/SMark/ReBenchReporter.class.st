@@ -3,12 +3,13 @@ A ReBenchReporter is reporter for the ReBench framework (cf. https://github.com/
 It is used be the ReBenchHarness, which is the main class of interest for users that just want to execute benchmarks.
 "
 Class {
-	#name : #ReBenchReporter,
-	#superclass : #SMarkSimpleStatisticsReporter,
-	#category : 'SMark'
+	#name : 'ReBenchReporter',
+	#superclass : 'SMarkSimpleStatisticsReporter',
+	#category : 'SMark',
+	#package : 'SMark'
 }
 
-{ #category : #'as yet unclassified' }
+{ #category : 'as yet unclassified' }
 ReBenchReporter >> benchmarkHeader: aName [
 	^ self
 ]

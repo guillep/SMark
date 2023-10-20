@@ -1,19 +1,21 @@
 Class {
-	#name : #SMarkHarnessArgumentParserTest,
-	#superclass : #TestCase,
+	#name : 'SMarkHarnessArgumentParserTest',
+	#superclass : 'TestCase',
 	#instVars : [
 		'parser'
 	],
-	#category : 'SMark-Tests'
+	#category : 'SMark-Tests',
+	#package : 'SMark',
+	#tag : 'Tests'
 }
 
-{ #category : #running }
+{ #category : 'running' }
 SMarkHarnessArgumentParserTest >> setUp [
 	parser := SMarkHarnessArgumentParser new.
 	parser harness: SMarkHarness.
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 SMarkHarnessArgumentParserTest >> testParseArgumentsOnlyBench [
 	| arguments runnerAndReporter runner reporter runOnly |
 	arguments := {#ignored. 'SMarkTestSuite.benchA' }.
@@ -32,7 +34,7 @@ SMarkHarnessArgumentParserTest >> testParseArgumentsOnlyBench [
 
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 SMarkHarnessArgumentParserTest >> testParseArgumentsOnlySuite [
 	| arguments runnerAndReporter runner reporter |
 	arguments := {#ignored. 'SMarkTestSuite' }.
@@ -49,7 +51,7 @@ SMarkHarnessArgumentParserTest >> testParseArgumentsOnlySuite [
 
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 SMarkHarnessArgumentParserTest >> testParseArgumentsReporterSuiteIterations [
 	| arguments runnerAndReporter runner reporter |
 	arguments := {#ignored. 'SMarkSimpleStatisticsReporter'. 'SMarkTestSuite'. '13'. }.
@@ -68,7 +70,7 @@ SMarkHarnessArgumentParserTest >> testParseArgumentsReporterSuiteIterations [
 	self assert: 13 equals: runner iterations.	
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 SMarkHarnessArgumentParserTest >> testParseArgumentsRunnerReporterSuiteIterations [
 	| arguments runnerAndReporter runner reporter |
 	arguments := {#ignored. 'SMarkTestRunner'. 'SMarkSimpleStatisticsReporter'. 'SMarkTestSuite'. '13'. }.
@@ -88,7 +90,7 @@ SMarkHarnessArgumentParserTest >> testParseArgumentsRunnerReporterSuiteIteration
 	self assert: 13 equals: runner iterations.
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 SMarkHarnessArgumentParserTest >> testParseArgumentsRunnerSuiteIterations [
 	| arguments runnerAndReporter runner reporter |
 	arguments := {#ignored. 'SMarkTestRunner'. 'SMarkTestSuite'. '13'. }.
@@ -107,7 +109,7 @@ SMarkHarnessArgumentParserTest >> testParseArgumentsRunnerSuiteIterations [
 	self assert: 13 equals: runner iterations.
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 SMarkHarnessArgumentParserTest >> testParseArgumentsSuiteAndIterations [
 	| arguments runnerAndReporter runner reporter |
 	arguments := {#ignored. 'SMarkTestSuite'. '13' }.
@@ -125,7 +127,7 @@ SMarkHarnessArgumentParserTest >> testParseArgumentsSuiteAndIterations [
 	self assert: 13 equals: runner iterations.
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 SMarkHarnessArgumentParserTest >> testParseArgumentsSuiteIterationsProcesses [
 	| arguments runnerAndReporter runner reporter |
 	arguments := {#ignored. 'SMarkTestSuite'. '13'. '91' }.
@@ -145,7 +147,7 @@ SMarkHarnessArgumentParserTest >> testParseArgumentsSuiteIterationsProcesses [
 
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 SMarkHarnessArgumentParserTest >> testParseArgumentsSuiteIterationsProcessesProblemSize [
 	| arguments runnerAndReporter runner reporter |
 	arguments := {#ignored. 'SMarkTestSuite'. '13'. '91'. 'SSS' }.
@@ -166,7 +168,7 @@ SMarkHarnessArgumentParserTest >> testParseArgumentsSuiteIterationsProcessesProb
 
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 SMarkHarnessArgumentParserTest >> testParseBenchmarkOrSuite [
 	| example1 example2 example3 example4 example5 |
 	example1 := 'String>>findTokens:'.

@@ -1,25 +1,27 @@
 Class {
-	#name : #SMarkCompiler,
-	#superclass : #SMarkSuite,
-	#category : #'SMark-Classic'
+	#name : 'SMarkCompiler',
+	#superclass : 'SMarkSuite',
+	#category : 'SMark-Classic',
+	#package : 'SMark',
+	#tag : 'Classic'
 }
 
-{ #category : #'script entry' }
+{ #category : 'script entry' }
 SMarkCompiler class >> defaultNumberOfIterations [
 	^ 50
 ]
 
-{ #category : #'script entry' }
+{ #category : 'script entry' }
 SMarkCompiler class >> defaultNumberOfProcesses [
 	^ 8
 ]
 
-{ #category : #'script entry' }
+{ #category : 'script entry' }
 SMarkCompiler class >> defaultProblemSize [
 	^ 30
 ]
 
-{ #category : #benchmarking }
+{ #category : 'benchmarking' }
 SMarkCompiler >> benchCompiler [
 	"was Benchmark>>testCompiler"
 	self problemSize timesRepeat: [

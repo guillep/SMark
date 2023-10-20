@@ -4,25 +4,26 @@ This runner is specific to platforms with support for real parallelism.
 Weak scaling is defined as how the solution time varies with the number of processors for a fixed problem size per processor.
 "
 Class {
-	#name : #SMarkWeakScalingRunner,
-	#superclass : #SMarkRunner,
+	#name : 'SMarkWeakScalingRunner',
+	#superclass : 'SMarkRunner',
 	#instVars : [
 		'numInnerIterations',
 		'runningProcesses',
 		'completionSignal',
 		'runningProcessesMtx'
 	],
-	#category : 'SMark'
+	#category : 'SMark',
+	#package : 'SMark'
 }
 
-{ #category : #defaults }
+{ #category : 'defaults' }
 SMarkWeakScalingRunner class >> defaultNumberOfInnerIterations [
 	"The number of iterations of the inner loop
 	 in which the benchmark is executed."
 	^ 1
 ]
 
-{ #category : #benchmarking }
+{ #category : 'benchmarking' }
 SMarkWeakScalingRunner >> execute: aSelector withProcesses: numberOfProcesses withTimer: timer [
 	"This case is meant for all cases. REM: this is also used for numProc==1 to be able to measure the process start overhead in all cases.
 	 It will start the processes and wait for their completion."
@@ -53,7 +54,7 @@ SMarkWeakScalingRunner >> execute: aSelector withProcesses: numberOfProcesses wi
 	
 ]
 
-{ #category : #benchmarking }
+{ #category : 'benchmarking' }
 SMarkWeakScalingRunner >> executorCompleted [
 	runningProcessesMtx critical: [
 		runningProcesses := runningProcesses - 1.
@@ -63,7 +64,7 @@ SMarkWeakScalingRunner >> executorCompleted [
 	]
 ]
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 SMarkWeakScalingRunner >> initialize [
 	super initialize.
 	numProcesses			:= self class defaultNumberOfProcesses.
@@ -71,35 +72,35 @@ SMarkWeakScalingRunner >> initialize [
 
 ]
 
-{ #category : #benchmarking }
+{ #category : 'benchmarking' }
 SMarkWeakScalingRunner >> innerIterations [
 	"The number of inner iterations the benchmark is executed inside a processes"
 	^ numInnerIterations
 ]
 
-{ #category : #benchmarking }
+{ #category : 'benchmarking' }
 SMarkWeakScalingRunner >> innerIterations: anInteger [
 	"The number of inner iterations the benchmark is executed inside a processes"
 	numInnerIterations := anInteger
 ]
 
-{ #category : #benchmarking }
+{ #category : 'benchmarking' }
 SMarkWeakScalingRunner >> processes [
 	^ numProcesses
 ]
 
-{ #category : #benchmarking }
+{ #category : 'benchmarking' }
 SMarkWeakScalingRunner >> processes: anInteger [
 	numProcesses := anInteger
 ]
 
-{ #category : #reporting }
+{ #category : 'reporting' }
 SMarkWeakScalingRunner >> reportConfiguration: aStream [
 	super reportConfiguration: aStream.
 	aStream << ('inner iterations: ', numInnerIterations asString); cr.
 ]
 
-{ #category : #benchmarking }
+{ #category : 'benchmarking' }
 SMarkWeakScalingRunner >> timedBenchmarkExecution: aSelector [
 	"Will do a timed execution of the benchmark and return the result timer"
 	| timer |
