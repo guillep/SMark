@@ -13,7 +13,7 @@ Class {
 		'QuitVM',
 		'SafeBeforeQuit'
 	],
-	#category : 'Scripting'
+	#category : #'Scripting-Core'
 }
 
 { #category : #helper }
@@ -30,16 +30,18 @@ ScriptStarter class >> executeRunFor: scriptClassName with: arguments [
 
 { #category : #helper }
 ScriptStarter class >> getSystemAttributes [
+
 	| arguments arg i |
 	arguments := OrderedCollection new.
 	i := 2.
-	[[arg := Smalltalk vm getSystemAttribute: i] value == nil]
-		whileFalse: [arguments addLast: arg.
-			i := i + 1].
+	[ [ arg := Smalltalk vm getSystemAttribute: i ] value isNil ]
+		whileFalse: [
+			arguments addLast: arg.
+			i := i + 1 ].
 	^ arguments
 ]
 
-{ #category : #initialization }
+{ #category : #'class initialization' }
 ScriptStarter class >> initialize [
 	"Automatically install ScriptStarter when the code is filed in."
 	self install.
@@ -89,27 +91,22 @@ ScriptStarter class >> saveImageBeforeQuit: aBool [
 	SafeBeforeQuit := aBool
 ]
 
-{ #category : #'system startup entry' }
+{ #category : #'system startup' }
 ScriptStarter class >> startUp [
-	"startUp is invoked during startup.
-	 ScriptStarter has to be registered in the SystemDirectory's StartUpList
-	 See ScriptStarter>>install"
-	
+
 	| arguments scriptClassName |
-	"Ok, only, and really only during startup"
-	IsResuming ifFalse: [ Transcript show: 'ScriptStarter did not execute a given script, since it assumes to be executed after a snapshot and not during startup.'.
-		^ self. ].
-	
-	"First make sure that stdout output can be used if available."
+	IsResuming ifFalse: [
+		Transcript show:
+			'ScriptStarter did not execute a given script, since it assumes to be executed after a snapshot and not during startup.'.
+		^ self ].
 	ScriptConsole detectAvailableMechanismForStdout.
-	
 	arguments := self getSystemAttributes.
-	arguments size > 0
-		ifTrue: [scriptClassName := arguments at: 1.
-			self executeRunFor: scriptClassName with: arguments.]
+	arguments size > 0 ifFalse: [ ^ self ].
+	scriptClassName := arguments at: 1.
+	self executeRunFor: scriptClassName with: arguments
 ]
 
-{ #category : #'system startup entry' }
+{ #category : #'system startup' }
 ScriptStarter class >> startUp: resuming [
 	IsResuming := resuming.
 	^ super startUp: resuming.
@@ -117,8 +114,9 @@ ScriptStarter class >> startUp: resuming [
 
 { #category : #transporter }
 ScriptStarter class >> transportersForFileOutMenu [
-	^ { (Smalltalk at: #Transporter ifAbsent: [^#()])
-			forPackage: (PackageInfo named: 'Scripting') }
+
+	^ { ((Smalltalk at: #Transporter ifAbsent: [ ^ #(  ) ]) forPackage:
+		   (RPackageOrganizer default packageNamed: 'Scripting')) }
 ]
 
 { #category : #'system startup entry' }

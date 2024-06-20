@@ -1,7 +1,7 @@
 Class {
 	#name : #UpdateImage,
 	#superclass : #Object,
-	#category : 'Scripting'
+	#category : #'Scripting-Core'
 }
 
 { #category : #'script entry' }
@@ -15,12 +15,13 @@ UpdateImage class >> run: args [
 	
 	"Use a delayed process to do the actual work"
 	proc := [ (Delay forSeconds: 5) wait.
-	  "Create an up-to-date image"
-	  (FileStream readOnlyFileNamed: 'FileInAllRenaissanceCode.st') fileIn.
-	Transcript show: 'Snapshot and Quit now...'. 
-	 Smalltalk snapshot: true andQuit: true. ] newProcess.
+	 "Create an up-to-date image"
+		'FileInAllRenaissanceCode.st' asFileReference fileIn.
+		Transcript show: 'Snapshot and Quit now...'. 
+		Smalltalk snapshot: true andQuit: true 
+	] newProcess.
 
 	proc name: 'Update Image'.
 	proc resume.
-	
+
 ]
